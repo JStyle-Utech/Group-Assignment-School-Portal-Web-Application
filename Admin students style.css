@@ -1,0 +1,146 @@
+/*
+  CIT2011 Web Programming - School Portal Group Project
+  File: admin-students.css (Student Registry styles)
+  Role: Student 3 - Administrative Interface Developer
+  Group members (Name | ID# | Lab day/time): <list all members>
+  NOTE: Colours are CSS variables - change them to match your school's
+  colours and Student 1's master stylesheet.
+*/
+
+:root {
+  --brand: #1b4d3e;       /* replace with school colour */
+  --brand-dark: #12372c;
+  --accent: #c8a23a;      /* replace with school accent */
+  --bg: #f4f6f5;
+  --panel: #ffffff;
+  --text: #1f2a26;
+  --muted: #5d6b65;
+  --border: #d5dcd8;
+  --good: #1e7a46;
+  --bad: #b3261e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 0.75rem; padding: 1rem 1.5rem;
+  background: var(--brand); color: #fff; border-bottom: 4px solid var(--accent);
+}
+.site-header h1 { margin: 0; font-size: 1.4rem; }
+.site-header nav { display: flex; gap: 1.25rem; }
+.site-header a { color: #fff; text-decoration: none; }
+.site-header a:hover, .site-header a:focus { text-decoration: underline; }
+
+/* ---------- Page layout (CSS Grid) ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.table-panel { grid-column: 1 / -1; }
+
+.panel {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 6px; padding: 1.25rem;
+}
+.panel h2 { margin-top: 0; font-size: 1.15rem; color: var(--brand); }
+
+/* ---------- Cohort summary ---------- */
+.summary-list { list-style: none; margin: 0; padding: 0; }
+.summary-list li {
+  display: flex; justify-content: space-between;
+  padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+}
+.summary-list li:last-child { border-bottom: 0; }
+.summary-list strong { color: var(--brand); }
+
+/* ---------- Form ---------- */
+#studentForm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.9rem 1.1rem;
+}
+.field { display: flex; flex-direction: column; }
+.field label { font-weight: 600; margin-bottom: 0.25rem; font-size: 0.9rem; }
+.wide { grid-column: 1 / -1; }
+
+input, select {
+  font: inherit; padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border); border-radius: 4px; background: #fff;
+}
+input:focus, select:focus, button:focus-visible {
+  outline: 3px solid var(--accent); outline-offset: 1px;
+}
+input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--bad); }
+
+.error { color: var(--bad); min-height: 1.1em; font-size: 0.8rem; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+.message { margin: 0; font-weight: 600; }
+.message.good { color: var(--good); }
+.message.bad { color: var(--bad); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  font: inherit; cursor: pointer; padding: 0.5rem 1rem;
+  border: 1px solid var(--border); border-radius: 4px; background: #fff; color: var(--text);
+}
+.btn:hover { background: #eef2f0; }
+.btn.primary { background: var(--brand); border-color: var(--brand); color: #fff; }
+.btn.primary:hover { background: var(--brand-dark); }
+.btn.danger { color: var(--bad); border-color: var(--bad); }
+.btn.danger:hover { background: #fbeceb; }
+.btn.small { padding: 0.25rem 0.65rem; font-size: 0.85rem; }
+
+/* ---------- Toolbar ---------- */
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; }
+.toolbar input[type="search"] { flex: 1 1 220px; }
+.count { margin-left: auto; color: var(--muted); font-size: 0.9rem; }
+
+/* ---------- Table ---------- */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td { text-align: left; padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--border); }
+thead th { background: #eaf0ed; position: sticky; top: 0; }
+tbody tr:hover { background: #f7faf8; }
+td.empty { text-align: center; color: var(--muted); padding: 1.5rem; }
+
+button.sort {
+  font: inherit; font-weight: 700; background: none; border: 0;
+  cursor: pointer; color: var(--brand); padding: 0;
+}
+button.sort:hover { text-decoration: underline; }
+
+.row-actions { display: flex; gap: 0.4rem; }
+
+.badge { padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+.badge.active { background: #dff3e7; color: var(--good); }
+.badge.inactive { background: #eceeed; color: var(--muted); }
+
+/* ---------- Responsive breakpoints ---------- */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; padding: 1rem; }
+}
+@media (max-width: 480px) {
+  .site-header { flex-direction: column; align-items: flex-start; }
+  .count { margin-left: 0; width: 100%; }
+}
