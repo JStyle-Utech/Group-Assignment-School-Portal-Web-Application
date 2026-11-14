@@ -20,17 +20,25 @@ function login(username, password) {
   );
 
   if (user) {
+    // Session lives in sessionStorage, so it clears when the tab closes
     // Save only what other pages need, never the password
-   sessionStorage.setItem(STORAGE_KEYS.session, JSON.stringify({ username: user.username, role: user.role }));
+    sessionStorage.setItem(
+      STORAGE_KEYS.session,
+      JSON.stringify({ username: user.username, role: user.role }),
+    );
+    return user.role;
+  }
+  return null;
+}
 
 // Returns the logged-in user, or null if nobody is logged in
 function getCurrentUser() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEYS.session));
+  return JSON.parse(sessionStorage.getItem(STORAGE_KEYS.session));
 }
 
 // Clears the session and goes back to the login page
 function logout() {
-  localStorage.removeItem(STORAGE_KEYS.session);
+  sessionStorage.removeItem(STORAGE_KEYS.session);
   window.location.href = getRootPath() + "login.html";
 }
 
