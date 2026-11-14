@@ -21,14 +21,7 @@ function login(username, password) {
 
   if (user) {
     // Save only what other pages need, never the password
-    saveData(STORAGE_KEYS.session, {
-      username: user.username,
-      role: user.role,
-    });
-    return user.role;
-  }
-  return null;
-}
+   sessionStorage.setItem(STORAGE_KEYS.session, JSON.stringify({ username: user.username, role: user.role }));
 
 // Returns the logged-in user, or null if nobody is logged in
 function getCurrentUser() {
