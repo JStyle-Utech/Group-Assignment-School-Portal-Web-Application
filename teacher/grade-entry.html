@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Enter Student Grades | School Portal</title><link rel="stylesheet" href="../css/teacher.css"></head>
+<body><header class="top"><div class="wrap"><strong>School Portal • Teacher Area</strong><span id="teacherName">Teacher</span></div></header>
+<nav class="nav wrap" aria-label="Teacher navigation"><a href="dashboard.html">Dashboard</a><a href="subjects.html">Subjects</a><a href="grade-entry.html">Grade Entry</a><a href="report-card.html">Report Cards</a><button type="button" id="logoutButton">Log out</button></nav>
+<main class="wrap"><h1>Enter Student Grades</h1><p class="intro">Pick a grade and subject, type each learner’s score from 0 to 100, then save. Blank boxes are not saved.</p><section class="panel"><div class="filters"><label>Grade level<select id="levelSelect"></select></label><label>Subject<select id="subjectSelect"></select></label></div><p class="muted">Each score is a final subject mark out of 100. This is a prototype assumption; your group can replace it with approved assessment weights later.</p></section><section class="panel"><h2>Grade table</h2><form id="gradesForm"><div class="table-scroll"><table><thead><tr><th>Student ID</th><th>Student</th><th>Score /100</th></tr></thead><tbody id="gradeRows"></tbody></table></div><p id="formMessage" role="status"></p><button class="button" type="submit">Save Grades</button></form></section></main>
+<footer class="wrap footer">CIT2011 group project • Teacher Module • Demonstration with mock browser data</footer>
+<script src="../js/storage.js"></script><script src="../js/auth.js"></script><script src="../js/teacher.js"></script></body></html>
