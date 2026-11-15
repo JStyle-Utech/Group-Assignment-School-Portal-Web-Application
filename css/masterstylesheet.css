@@ -232,6 +232,19 @@ textarea {
   text-align: center;
 }
 
+/*Login Page*/
+.login-section {
+  padding: var(--spacing-sections) 0;
+  text-align: center;
+}
+
+#login-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  padding: var(--spacing-large);
+}
+
 /*Responsive design (mobile devices)*/
 @media screen and (max-width: 768px) {
   header .container {
