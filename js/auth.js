@@ -59,7 +59,7 @@ function requireRole(...allowedRoles) {
 }
 
 // Connects the login form on login.html, if it is on this page
-const loginForm = document.getElementById("loginForm");
+const loginForm = document.getElementById("login-form");
 
 if (loginForm) {
   loginForm.addEventListener("submit", function (event) {
