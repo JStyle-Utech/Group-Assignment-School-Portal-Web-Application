@@ -190,6 +190,48 @@ textarea {
   margin-bottom: var(--spacing-medium);
 }
 
+/*Contact Us Page*/
+
+.contact-information {
+  padding: var(--spacing-sections) 0;
+  text-align: center;
+}
+
+.contact-form-section {
+  padding: var(--spacing-sections) 0;
+  text-align: center;
+}
+
+#contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  padding: var(--spacing-large);
+}
+
+.field {
+  margin-bottom: var(--spacing-medium);
+}
+
+.field label {
+  display: block;
+  margin-bottom: var(--spacing-small);
+  font-weight: bold;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-colour);
+  border-radius: var(--border-radius);
+}
+
+/*Submit button*/
+.actions {
+  text-align: center;
+}
+
 /*Responsive design (mobile devices)*/
 @media screen and (max-width: 768px) {
   header .container {
