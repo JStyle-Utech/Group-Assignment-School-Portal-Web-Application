@@ -1,4 +1,10 @@
-/*Stylesheet for Portal*/
+/*
+  CIT2011 Web Programming - School Portal Group Project
+  File: .css
+  Group Members: [NAMES AND ID NUMBERS]
+  Lab: FRIDAY 12PM
+
+  Stylesheet for Portal*/
 
 /*General*/
 * {
@@ -137,6 +143,53 @@ textarea {
   font: inherit;
 }
 
+/*About Us Page*/
+
+/*Section Spacing*/
+.history-section,
+.mission-vision,
+.accomplishments-section {
+  text-align: center;
+  padding: var(--spacing-sections) 0;
+}
+.teacher-directory {
+  padding: var(--spacing-sections) 0;
+  text-align: center;
+}
+
+.accomplishments {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-medium);
+}
+
+.accomplishment {
+  padding: var(--spacing-large);
+  border: 1px solid var(--border-colour);
+  border-radius: var(--border-radius);
+}
+
+.teachers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-medium);
+}
+
+.teacher {
+  padding: var(--spacing-large);
+  border: 1px solid var(--border-colour);
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.teacher img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-medium);
+}
+
 /*Responsive design (mobile devices)*/
 @media screen and (max-width: 768px) {
   header .container {
@@ -152,5 +205,10 @@ textarea {
 
   .container {
     width: 95%;
+  }
+
+  .accomplishments,
+  .teachers {
+    grid-template-columns: 1fr;
   }
 }
