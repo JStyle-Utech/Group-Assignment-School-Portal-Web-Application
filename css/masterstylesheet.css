@@ -16,8 +16,8 @@
 /*Variables for design*/
 :root {
   --primary-colour: ;
-  --secondary-colour: ;
-  --accent-colour: ;
+  --secondary-colour: #ffd700;
+  --accent-colour: #800000;
 
   --background-colour: ;
   --card-colour: ;
@@ -266,4 +266,8 @@ textarea {
   .teachers {
     grid-template-columns: 1fr;
   }
+}
+
+.hero {
+  background-image: url("images/wolmers-logo2.png");
 }
