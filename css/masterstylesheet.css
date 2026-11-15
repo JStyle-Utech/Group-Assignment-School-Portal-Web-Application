@@ -1,10 +1,11 @@
 /*
   CIT2011 Web Programming - School Portal Group Project
-  File: .css
+  File: style.css
   Group Members: [NAMES AND ID NUMBERS]
   Lab: FRIDAY 12PM
 
-  Stylesheet for Portal*/
+  Stylesheet for Portal
+*/
 
 /*General*/
 * {
@@ -15,19 +16,19 @@
 
 /*Variables for design*/
 :root {
-  --primary-colour: ;
+  --primary-colour: #154734;
   --secondary-colour: #ffd700;
   --accent-colour: #800000;
 
-  --background-colour: ;
-  --card-colour: ;
+  --background-colour: #f0f0f0;
+  --card-colour: #ffffff;
 
-  --main-text: ;
-  --muted-text: ;
+  --main-text: #333333;
+  --muted-text: #666666;
 
-  --border-colour: ;
+  --border-colour: #cccccc;
 
-  --font-family: Arial, sans-serif; /*default...will change soon*/
+  --font-family: Arial, sans-serif;
 
   --spacing-small: 8px;
   --spacing-medium: 16px;
@@ -41,6 +42,14 @@
 /*Base styling*/
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-colour);
+  color: var(--main-text);
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
 /*Layout*/
@@ -75,11 +84,13 @@ nav a {
   font-size: 14px;
   font-weight: bold;
 }
+
 nav a:hover {
   text-decoration: underline;
 }
+
 nav a:focus-visible {
-  outline: 2px solid var(--accent-colour); /*will show when colour is there*/
+  outline: 2px solid var(--accent-colour);
   outline-offset: 4px;
 }
 
@@ -109,13 +120,6 @@ p {
   font-weight: bold;
 }
 
-body {
-  font-family: var(--font-family);
-  background-color: var(--background-colour);
-  color: var(--main-text);
-  line-height: 1.6;
-  min-height: 100vh;
-}
 /*Footer*/
 footer {
   padding: var(--spacing-large) 0;
@@ -144,14 +148,13 @@ textarea {
 }
 
 /*About Us Page*/
-
-/*Section Spacing*/
 .history-section,
 .mission-vision,
 .accomplishments-section {
   text-align: center;
   padding: var(--spacing-sections) 0;
 }
+
 .teacher-directory {
   padding: var(--spacing-sections) 0;
   text-align: center;
@@ -191,7 +194,6 @@ textarea {
 }
 
 /*Contact Us Page*/
-
 .contact-information {
   padding: var(--spacing-sections) 0;
   text-align: center;
@@ -268,6 +270,22 @@ textarea {
   }
 }
 
-.hero {
-  background-image: url("images/wolmers-logo2.png");
+/*Hero background*/
+.hero-home {
+  background-image: url("../images/wolmers-logo2.png");
+  background-size: 300px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--primary-colour);
+  height: 50vh;
 }
+
+/*.hero-about {
+  background-image: url("../images/wolmers-logo2.png");
+  background-size: 300px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--primary-colour);
+  height: 50vh;
+}
+  */
