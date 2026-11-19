@@ -1,0 +1,77 @@
+<!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
+  File: teacher-dashboard.html
+  Group members (Name | ID# | Fridays/12:00 PM- 1:50 PM):
+    1. Shantelle Young | 2502159 |
+    2. Domonique Butler | 2502160 | 
+    3. Jaheem Style | 2502161 | 
+    4. Abigail Reid | 2501978 |
+    5. Ameallia Williams | 2502163 | 
+-->
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width", initial-scale=1" />
+            <title>Teacher Dashboard</title>
+            <link rel="stylesheet" href="../css/masterstylesheet.css" />
+        </head>
+
+        <body>
+
+
+            <!--Navigation-->
+            <header>
+                <h1>[School Name] Portal</h1>
+                <nav>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="subjects.html">Subjects</a></li>
+                        <li><a href="grade-entry.html">Grade Entry</a></li>
+                        <li><a href="report-card.html">Report Cards</a></li>
+                        <li><a href="#" onclick="logout()">Log Out</a></li> 
+                    </ul>
+                </nav>
+            </header>
+
+            <!--Main Content-->
+            <main>
+                <h2 id="welcomeText">Welcome, Teacher!</h2>
+                <p>Select a module below to manage your classes and student grades.</p>
+
+                <section class="dashboard-cards">
+                    <div class="card">
+                        <h3>1. Select Subject &amp; Class</h3>
+                        <p>Filter subjects and view active students in your class.</p>
+                        <a href="subjects.html">Go to Subjects</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>2. Batch Grade Entry</h3>
+                        <p>Enter assessment scores for an entire class at once.</p>
+                        <a href="grade-entry.html">Enter Grades</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>3. Report Card Generator</h3>
+                        <p>Calculate averages and generate student report cards.</p>
+                        <a href="report-card.html">View Report Cards</a>
+                    </div>
+                </section>
+            </main>
+
+            <!--Footer-->
+            <footer>
+                <div class="container">
+                    <p>&copy; 2026 [SCHOOL NAME]. All rights reserved.</p>
+                </div>
+            </footer>
+
+            <!--Scripts-->
+            <script src="../js/storage.js"></script>
+            <script src="../js/auth.js"></script>
+            <script src="../js/teacher.js"></script>
+            <script>requireRole("teacher");</script>
+
+        </body>
+    </html>
