@@ -1,6 +1,6 @@
 /*
   CIT2011 Web Programming - School Portal Group Project
-  File: style.css
+  File: masterstylesheet.css
   Group Members: [NAMES AND ID NUMBERS]
   Lab: FRIDAY 12PM
 
@@ -16,9 +16,9 @@
 
 /*Variables for design*/
 :root {
-  --primary-colour: #154734;
+  --primary-colour: #800000;
   --secondary-colour: #ffd700;
-  --accent-colour: #800000;
+  --accent-colour: #154734;
 
   --background-colour: #f0f0f0;
   --card-colour: #ffffff;
@@ -28,7 +28,8 @@
 
   --border-colour: #cccccc;
 
-  --font-family: Arial, sans-serif;
+  --font-family: Georgia, "Times New Roman", serif;
+  --heading-font: "Times New Roman", Times, serif;
 
   --spacing-small: 8px;
   --spacing-medium: 16px;
@@ -52,55 +53,11 @@ body {
   min-height: 100vh;
 }
 
-/*Layout*/
-.container {
-  width: 90%;
-  max-width: var(--container-width);
-  margin: 0 auto;
-}
-
-header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
-  gap: 24px;
-}
-
-header {
-  padding: var(--spacing-medium) 0;
-}
-
+h1,
+h2,
+h3,
 .logo {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-nav a {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-nav a:focus-visible {
-  outline: 2px solid var(--accent-colour);
-  outline-offset: 4px;
-}
-
-.welcome-section {
-  padding: var(--spacing-sections) 0;
-  text-align: center;
-}
-
-.intro {
-  padding: var(--spacing-sections) 0;
+  font-family: var(--heading-font);
 }
 
 h1,
@@ -112,18 +69,89 @@ p {
   margin-bottom: var(--spacing-medium);
 }
 
+.muted-text {
+  color: var(--muted-text);
+}
+
+/*Layout*/
+.container {
+  width: 90%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+/*Navigation*/
+header {
+  padding: var(--spacing-medium) 0;
+  background-color: var(--card-colour);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-colour);
+}
+
+.logo img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+
+.logo span {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+}
+
+nav a {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: var(--primary-colour);
+  text-decoration: underline;
+}
+
+nav a:focus-visible {
+  outline: 2px solid var(--accent-colour);
+  outline-offset: 4px;
+}
+
+/*Buttons*/
 .button {
   display: inline-block;
   padding: 12px 24px;
   border-radius: var(--border-radius);
   text-align: center;
   font-weight: bold;
+  background-color: var(--primary-colour);
+  color: var(--card-colour);
+  border: none;
+  cursor: pointer;
 }
 
-/*Footer*/
-footer {
-  padding: var(--spacing-large) 0;
-  text-align: center;
+.button:hover {
+  background-color: var(--accent-colour);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--secondary-colour);
+  outline-offset: 4px;
 }
 
 /*Images*/
@@ -133,7 +161,7 @@ img {
   display: block;
 }
 
-/*Link*/
+/*Links*/
 a {
   color: inherit;
   text-decoration: none;
@@ -147,42 +175,402 @@ textarea {
   font: inherit;
 }
 
-/*About Us Page*/
-.history-section,
-.mission-vision,
-.accomplishments-section {
+/*Homepage*/
+
+/*Hero banner*/
+.hero-home {
+  background-image:
+    linear-gradient(rgba(40, 0, 0, 0.55), rgba(40, 0, 0, 0.55)),
+    url("../images/wolmershero.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 550px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  color: var(--card-colour);
+  padding: var(--spacing-large);
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero-content h1 {
+  font-size: 64px;
+  color: var(--secondary-colour);
+}
+
+.hero-subtitle {
+  letter-spacing: 3px;
+  font-size: 14px;
+}
+
+.hero-motto {
+  font-size: 18px;
+}
+
+.hero-button {
+  background-color: var(--secondary-colour);
+  color: var(--primary-colour);
+}
+
+.hero-button:hover {
+  background-color: var(--card-colour);
+  color: var(--primary-colour);
+}
+
+/*Section headings*/
+.section-label {
+  color: var(--primary-colour);
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/*Welcome section*/
+.welcome-section {
+  padding: 70px 0;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+/*About preview on homepage*/
+.home-about {
+  background-color: var(--card-colour);
+  padding: var(--spacing-sections) 0;
+}
+
+.home-about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-large);
+  align-items: center;
+}
+
+.home-about-image img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.home-about-text {
+  padding: var(--spacing-large);
+}
+
+/*School highlights*/
+.school-highlights {
+  padding: var(--spacing-sections) 0;
+  text-align: center;
+}
+
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-medium);
+}
+
+.highlight-card {
+  background-color: var(--card-colour);
+  border: 1px solid var(--border-colour);
+  border-top: 4px solid var(--secondary-colour);
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius);
+}
+
+.highlight-card h3 {
+  font-size: 32px;
+  color: var(--primary-colour);
+}
+
+/*Notable Alumna Section*/
+.alumna-section {
+  padding: var(--spacing-sections) 0;
+  background-color: var(--card-colour);
+}
+
+.alumna-content {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--spacing-large);
+  align-items: center;
+}
+
+.alumna-image img {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--border-radius);
+  margin: 0 auto;
+}
+
+.alumna-text {
+  text-align: left;
+}
+
+.alumna-text h3 {
+  color: var(--primary-colour);
+  font-family: var(--heading-font);
+  font-size: 28px;
+  margin-bottom: var(--spacing-medium);
+}
+
+.alumna-text p {
+  line-height: 1.8;
+}
+
+/*Text links*/
+.text-link {
+  color: var(--primary-colour);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/*Portal section*/
+.portal-section {
+  background-image:
+    linear-gradient(rgba(40, 0, 0, 0.7), rgba(40, 0, 0, 0.7)),
+    url("../images/portalimage.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 350px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--card-colour);
   text-align: center;
   padding: var(--spacing-sections) 0;
 }
 
-.teacher-directory {
-  padding: var(--spacing-sections) 0;
+.portal-section .section-label {
+  color: var(--secondary-colour);
+}
+
+.portal-button {
+  background-color: var(--secondary-colour);
+  color: var(--primary-colour);
+}
+
+.portal-button:hover {
+  background-color: var(--card-colour);
+  color: var(--primary-colour);
+}
+
+/*About Us Page*/
+
+/*About page banner*/
+.hero-about {
+  background-image:
+    linear-gradient(rgba(40, 0, 0, 0.55), rgba(40, 0, 0, 0.55)),
+    url("../images/wolmershero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--primary-colour);
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--card-colour);
+  padding: var(--spacing-large);
+}
+
+.hero-about h1 {
+  color: var(--secondary-colour);
+  font-size: 52px;
+}
+
+.hero-about p {
+  color: var(--card-colour);
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+/*About introduction spacing*/
+.hero-about + .welcome-section {
+  padding-top: 50px;
+  padding-bottom: 25px;
+}
+
+/*History section*/
+.history-section {
+  background-color: var(--background-colour);
+  padding: 25px 0 75px;
+}
+
+.history-section .container {
+  max-width: 1100px;
+}
+
+.history-section h2,
+.mission-vision h2,
+.accomplishments-section h2,
+.teacher-directory h2 {
+  color: var(--primary-colour);
+  font-size: 36px;
+  text-align: left;
+  margin-bottom: var(--spacing-large);
+}
+
+.history-section h2 {
+  border-left: 5px solid var(--secondary-colour);
+  padding-left: 15px;
+}
+
+.history-section p {
+  font-size: 17px;
+  line-height: 1.9;
+  margin-bottom: 22px;
+}
+
+/*Mission and vision*/
+.mission-vision {
+  background-color: var(--card-colour);
+  padding: 75px 0;
+  text-align: center;
+}
+
+.mission-vision .container {
+  max-width: 900px;
+  background-color: #f7f3ed;
+  border-top: 5px solid var(--secondary-colour);
+  padding: 40px;
+  border-radius: var(--border-radius);
+}
+
+.mission-vision h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-top: var(--spacing-medium);
+}
+
+.mission-vision p {
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+/*Historical milestones*/
+.accomplishments-section {
+  background-color: var(--background-colour);
+  padding: 75px 0;
+  text-align: center;
+}
+
+.accomplishments-section .container {
+  max-width: 1100px;
+}
+
+.accomplishments-section > .container > p {
+  font-size: 17px;
+  margin-bottom: 35px;
+}
+
+.accomplishments-section h2 {
   text-align: center;
 }
 
 .accomplishments {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-medium);
+  gap: var(--spacing-large);
+  align-items: stretch;
 }
 
 .accomplishment {
   padding: var(--spacing-large);
+  background-color: var(--card-colour);
   border: 1px solid var(--border-colour);
+  border-top: 5px solid var(--secondary-colour);
   border-radius: var(--border-radius);
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.accomplishment:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.accomplishment h3 {
+  color: var(--primary-colour);
+  font-size: 32px;
+  margin-bottom: var(--spacing-small);
+}
+
+.accomplishment p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.accomplishment p:last-child {
+  color: var(--primary-colour);
+  font-weight: bold;
+  border-top: 1px solid var(--border-colour);
+  padding-top: var(--spacing-small);
+}
+
+/*Special maroon milestone card*/
+.accomplishment:nth-child(3) {
+  background-color: var(--primary-colour);
+  color: var(--card-colour);
+  border-top: 5px solid var(--secondary-colour);
+}
+
+.accomplishment:nth-child(3) h3,
+.accomplishment:nth-child(3) p:last-child {
+  color: var(--secondary-colour);
+}
+
+.accomplishment:nth-child(3) p:last-child {
+  border-top-color: rgba(255, 255, 255, 0.35);
+}
+
+/*Teacher directory*/
+.teacher-directory {
+  background-color: var(--card-colour);
+  padding: 75px 0;
+  text-align: center;
+}
+
+.teacher-directory h2 {
+  text-align: center;
+}
+
+.teacher-directory > .container > p {
+  font-size: 17px;
+  margin-bottom: 35px;
 }
 
 .teachers {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-medium);
+  gap: var(--spacing-large);
 }
 
 .teacher {
   padding: var(--spacing-large);
+  background-color: var(--card-colour);
   border: 1px solid var(--border-colour);
+  border-top: 5px solid var(--secondary-colour);
   border-radius: var(--border-radius);
   text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .teacher img {
@@ -193,22 +581,63 @@ textarea {
   margin-bottom: var(--spacing-medium);
 }
 
+.teacher h3 {
+  color: var(--primary-colour);
+  font-size: 22px;
+  margin-bottom: var(--spacing-small);
+}
+
+.teacher p {
+  font-size: 16px;
+  color: var(--muted-text);
+}
+
 /*Contact Us Page*/
-.contact-information {
-  padding: var(--spacing-sections) 0;
+.contact-banner {
+  background-color: var(--primary-colour);
+  padding: 70px 20px;
   text-align: center;
+}
+
+/*Contact Us heading*/
+.contact-banner h1.contact-title {
+  color: var(--secondary-colour);
+  font-family: var(--heading-font);
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.contact-banner p {
+  color: white;
+  font-size: 17px;
+}
+
+.contact-information {
+  background-color: var(--card-colour);
+  padding: var(--spacing-sections) 20px;
+  text-align: center;
+}
+
+.contact-information h2,
+.contact-form-section h2 {
+  color: var(--primary-colour);
 }
 
 .contact-form-section {
-  padding: var(--spacing-sections) 0;
-  text-align: center;
+  background-color: #f7f3ed;
+  padding: var(--spacing-sections) 20px;
 }
 
 #contact-form {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 650px;
+  margin: 25px auto 0;
   text-align: left;
-  padding: var(--spacing-large);
+  padding: 30px;
+  background-color: var(--card-colour);
+  border-top: 4px solid var(--secondary-colour);
+  border-radius: var(--border-radius);
 }
 
 .field {
@@ -219,6 +648,7 @@ textarea {
   display: block;
   margin-bottom: var(--spacing-small);
   font-weight: bold;
+  color: var(--primary-colour);
 }
 
 .field input,
@@ -227,6 +657,14 @@ textarea {
   padding: 12px;
   border: 1px solid var(--border-colour);
   border-radius: var(--border-radius);
+  font-family: var(--font-family);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: 2px solid var(--secondary-colour);
+  outline-offset: 2px;
+  border-color: var(--primary-colour);
 }
 
 /*Submit button*/
@@ -234,20 +672,101 @@ textarea {
   text-align: center;
 }
 
+#contact-form .button {
+  width: 100%;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+#contact-form .button:hover {
+  background-color: var(--secondary-colour);
+  color: var(--primary-colour);
+}
+
 /*Login Page*/
+.login-welcome {
+  background:
+    linear-gradient(rgba(40, 0, 0, 0.6), rgba(40, 0, 0, 0.6)),
+    url("../images/wolmershero.jpg");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 65px 20px;
+  color: white;
+}
+
+.login-welcome h1 {
+  color: #ffd700;
+  font-size: 60px;
+}
+
+.login-welcome p {
+  color: white;
+}
+
 .login-section {
-  padding: var(--spacing-sections) 0;
+  background-color: #f0f0f0;
+  padding: 50px 20px;
   text-align: center;
 }
 
-#login-form {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
-  padding: var(--spacing-large);
+.login-section h2 {
+  color: #800000;
+  font-size: 36px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto 25px;
 }
 
-/*Responsive design (mobile devices)*/
+#login-form {
+  max-width: 500px;
+  margin: 25px auto;
+  padding: 30px;
+  background-color: white;
+  border-top: 4px solid #ffd700;
+  border-radius: 8px;
+}
+
+#login-form .field {
+  text-align: left;
+}
+
+#login-form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+#login-form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#login-form .button {
+  width: 100%;
+  background-color: #800000;
+  color: white;
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#login-form .button:hover {
+  background-color: #ffd700;
+  color: #800000;
+}
+
+/*Footer*/
+footer {
+  padding: var(--spacing-large) 0;
+  text-align: center;
+}
+
+/*Responsive design*/
 @media screen and (max-width: 768px) {
   header .container {
     flex-direction: column;
@@ -265,27 +784,91 @@ textarea {
   }
 
   .accomplishments,
-  .teachers {
+  .teachers,
+  .home-about-content,
+  .highlight-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    font-size: 42px;
+  }
+
+  .hero-about h1 {
+    font-size: 38px;
+  }
+
+  .home-about-text {
+    padding: var(--spacing-medium) 0;
+  }
+
+  .hero-home {
+    min-height: 400px;
+  }
+
+  .alumna-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .alumna-text {
+    text-align: center;
+  }
+
+  .portal-section {
+    min-height: 300px;
+  }
+
+  #login-form,
+  #contact-form {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .history-section,
+  .mission-vision,
+  .accomplishments-section,
+  .teacher-directory {
+    padding: 50px 0;
+  }
+
+  .hero-about + .welcome-section {
+    padding-top: 35px;
+    padding-bottom: 20px;
+  }
+
+  .history-section {
+    padding-top: 20px;
+  }
+
+  .mission-vision .container {
+    padding: 25px;
+  }
+
+  .history-section h2,
+  .mission-vision h2,
+  .accomplishments-section h2,
+  .teacher-directory h2 {
+    font-size: 30px;
+  }
+
+  .contact-banner h1.contact-title {
+    font-size: 36px;
   }
 }
 
-/*Hero background*/
-.hero-home {
-  background-image: url("../images/wolmers-logo2.png");
-  background-size: 300px auto;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: var(--primary-colour);
-  height: 50vh;
+/*Payment status colours*/
+.status-paid {
+  background-color: #d4edda;
+  color: #155724;
 }
 
-/*.hero-about {
-  background-image: url("../images/wolmers-logo2.png");
-  background-size: 300px auto;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: var(--primary-colour);
-  height: 50vh;
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
 }
-  */
+
+.status-outstanding {
+  background-color: #f8d7da;
+  color: #721c24;
+}

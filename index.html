@@ -1,18 +1,19 @@
-<!--CIT2011 Web Programming - School Portal Group Project
+<!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
   File: index.html
   Group Members: [NAMES AND ID NUMBERS]
   Lab: FRIDAY 12PM
-  
-  Home Page
-  -->
 
-<!doctype html>
+  Home Page
+-->
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>School Portal | Home</title>
+    <title>Wolmer's Trust High School for Girls | Home</title>
 
     <link rel="stylesheet" href="css/masterstylesheet.css" />
   </head>
@@ -21,7 +22,13 @@
     <!--Navigation-->
     <header>
       <div class="container">
-        <a href="index.html" class="logo"> School Portal </a>
+        <a href="index.html" class="logo">
+          <img
+            src="images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
 
         <nav aria-label="Main">
           <ul>
@@ -33,41 +40,171 @@
         </nav>
       </div>
     </header>
-    <!--Hero banner-->
-    <section class="hero-home"></section>
 
     <main>
-      <!--"Welcome section-->
-      <section class="welcome-section">
-        <div class="container">
-          <h1>Welcome to Our School Portal</h1>
+      <!--Hero banner-->
+      <section class="hero-home">
+        <div class="hero-content">
+          <p class="hero-subtitle">WOLMER'S TRUST HIGH SCHOOL FOR GIRLS</p>
 
-          <p>
-            Connecting students, teachers and administrators through a single,
-            convenient platform
-          </p>
+          <h1>Age Quod Agis</h1>
 
-          <a href="login.html" class="button">Access Portal</a>
+          <p class="hero-motto">Whatever You Do, Do It Well</p>
+
+          <a href="about.html" class="button hero-button">
+            Discover Our School
+          </a>
         </div>
       </section>
 
-      <!--Introduction-->
-      <section class="intro">
+      <!--Welcome section-->
+      <section class="welcome-section">
         <div class="container">
-          <h2>Welcome to the Wolmer's High School for Girls Community</h2>
+          <p class="section-label">WELCOME TO WOLMER'S</p>
+
+          <h2>A Tradition of Learning and Excellence</h2>
 
           <p>
-            Learn more about our school whilst gaining access to academic
-            resources and staying in touch with the school community
+            Welcome to the Wolmer's Trust High School for Girls community.
+            Explore our school's history, achievements and the individuals who
+            contribute to our tradition of academics and excellence.
           </p>
+
+          <a href="about.html" class="text-link"> Learn More About Us </a>
+        </div>
+      </section>
+
+      <!--About the School preview-->
+      <section class="home-about">
+        <div class="container home-about-content">
+          <div class="home-about-image">
+            <img
+              src="images/wolmershistory.jpg"
+              alt="Historical photograph relating to Wolmer's"
+            />
+          </div>
+
+          <div class="home-about-text">
+            <p class="section-label">OUR SCHOOL</p>
+
+            <h2>Our Thriving Legacy</h2>
+
+            <p>
+              Established as a separate girls' school in 1896, Wolmer's Trust
+              High School for Girls is part of a deep-rooted educational
+              tradition in Jamaica.
+            </p>
+
+            <p>
+              Guided by the motto Age Quod Agis, we embrace the pursuit of
+              knowledge, personal growth and excellence.
+            </p>
+
+            <a href="about.html" class="button">Explore Our History</a>
+          </div>
+        </div>
+      </section>
+
+      <!--School highlights-->
+      <section class="school-highlights">
+        <div class="container">
+          <p class="section-label">OUR HERITAGE</p>
+
+          <h2>Rooted in History</h2>
+
+          <div class="highlight-grid">
+            <div class="highlight-card">
+              <h3>1729</h3>
+              <p>
+                The Wolmer's Trust was established through the legacy of John
+                Wolmer.
+              </p>
+            </div>
+
+            <div class="highlight-card">
+              <h3>1896</h3>
+              <p>
+                Wolmer's Girls became a separate school with its own leadership.
+              </p>
+            </div>
+
+            <div class="highlight-card">
+              <h3>1984</h3>
+              <p>
+                Glasspole House was completed as a shared sixth-form facility
+                for the boys' and girls' high schools.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--Notable Alumna-->
+      <section class="alumna-section">
+        <div class="container alumna-content">
+          <div class="alumna-image">
+            <img src="images/shellyann.jpg" alt="Shelly-Ann Fraser-Pryce" />
+          </div>
+
+          <div class="alumna-text">
+            <p class="section-label">WOLMER'S PRIDE</p>
+
+            <h2>Inspiring Excellence</h2>
+
+            <h3>Shelly-Ann Fraser-Pryce</h3>
+
+            <p>
+              Shelly-Ann is a proud alumna of Wolmer's Trust High School for
+              Girls. Fraser-Pryce is celebrated for her exceptional achievements
+              in athletics and her contributions to Jamaica.
+            </p>
+
+            <p>
+              In 2025, she donated US$50,000 to the school in support of
+              education for the future generations of students.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!--Portal access-->
+      <section class="portal-section">
+        <div class="container">
+          <p class="section-label">SCHOOL COMMUNITY</p>
+
+          <h2>The Student Portal</h2>
+
+          <p>
+            Access the school portal to connect with academic resources and
+            school information.
+          </p>
+
+          <a href="login.html" class="button portal-button"> Access Portal </a>
         </div>
       </section>
     </main>
 
+    <!--Footer-->
     <footer>
       <div class="container">
-        <p>&copy; 2026 Wolmer's High School for Girls. All rights reserved</p>
+        <p>
+          &copy; 2026 Wolmer's Trust High School for Girls. All rights reserved.
+        </p>
       </div>
     </footer>
   </body>
 </html>
+
+<!--
+Sources for info and some images
+
+  1. Wolmer's Trust - History
+     https://www.wolmers.org/trust/history
+     
+
+  2. Wolmer's Trust - Schools
+     https://www.wolmers.org/trust/schools
+
+  3. Jamaica Information Service (JIS)
+     https://jis.gov.jm/ 
+-->

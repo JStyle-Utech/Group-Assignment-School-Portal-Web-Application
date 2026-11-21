@@ -1,3 +1,4 @@
+<!doctype html>
 <!--
   CIT2011 Web Programming - School Portal Group Project
   File: contact.html
@@ -7,13 +8,12 @@
   Contact Us Page
 -->
 
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Contact Us | [SCHOOL NAME]</title>
+    <title>Contact Us | Wolmer's Girls School</title>
 
     <link rel="stylesheet" href="css/masterstylesheet.css" />
   </head>
@@ -22,7 +22,13 @@
     <!--Navigation-->
     <header>
       <div class="container">
-        <a href="index.html" class="logo"> School Portal </a>
+        <a href="index.html" class="logo">
+          <img
+            src="images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
 
         <nav aria-label="Main">
           <ul>
@@ -37,13 +43,12 @@
 
     <main>
       <!--Short intro to contact info-->
-      <section class="welcome-section">
+      <section class="contact-banner">
         <div class="container">
-          <h1>Contact Us</h1>
-
+          <h1 class="contact-title">Contact Us</h1>
           <p>
             Have a question or need assistance? Get in touch with us and we will
-            help you out
+            help you out.
           </p>
         </div>
       </section>
@@ -53,10 +58,9 @@
         <div class="container">
           <h2>Our Contact Information</h2>
 
-          <p>Address: [SCHOOL ADDRESS]</p>
-          <p>Telephone Number: [SCHOOL TELE NUM]</p>
-          <p>Email: [SCHOOL EMAIL ADDRESS]</p>
-          <p>Office Hours: [SCHOOL OFFICE HOURS]</p>
+          <p>Address: 2A Marescaux Road, Kingston 5</p>
+          <p>Telephone Number: (876) 924-9669 / (876) 948-2770</p>
+          <p>Email: info@wolmers.org</p>
         </div>
       </section>
 
@@ -73,9 +77,6 @@
           <form id="contact-form">
             <div class="field">
               <label for="full-name">Full Name</label>
-
-              <!--Pattern feature implemented in the name field to accept all letters (A-Z & a-z), 
-              spaces, apostrophes + hyphens with the minimum of 2 characters-->
               <input
                 type="text"
                 id="full-name"
@@ -88,7 +89,6 @@
 
             <div class="field">
               <label for="email">Email Address</label>
-
               <input
                 type="email"
                 id="email"
@@ -99,8 +99,20 @@
             </div>
 
             <div class="field">
-              <label for="subject">Subject</label>
+              <label for="phone">Telephone Number</label>
+              <!--Pattern for validation-->
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="876-123-4567"
+                pattern="876-[0-9]{3}-[0-9]{4}"
+                required
+              />
+            </div>
 
+            <div class="field">
+              <label for="subject">Subject</label>
               <input
                 type="text"
                 id="subject"
@@ -113,7 +125,6 @@
 
             <div class="field">
               <label for="message">Message</label>
-
               <textarea
                 id="message"
                 name="message"
@@ -135,7 +146,7 @@
 
     <footer>
       <div class="container">
-        <p>&copy; 2026 [SCHOOL NAME]. All rights reserved</p>
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
       </div>
     </footer>
   </body>

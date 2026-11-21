@@ -1,3 +1,4 @@
+<!doctype html>
 <!--
   CIT2011 Web Programming - School Portal Group Project
   File: about.html
@@ -7,15 +8,12 @@
   About Us Page
 -->
 
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <section class="hero-about">
-      <title>About Us | Wolmer's High School for Girls</title>
-    </section>
+    <title>About Us | Wolmer's Trust High School for Girls</title>
 
     <link rel="stylesheet" href="css/masterstylesheet.css" />
   </head>
@@ -24,7 +22,13 @@
     <!-- Navigation -->
     <header>
       <div class="container">
-        <a href="index.html" class="logo">School Portal</a>
+        <a href="index.html" class="logo">
+          <img
+            src="images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
 
         <nav aria-label="Main">
           <ul>
@@ -38,106 +42,254 @@
     </header>
 
     <main>
-      <!--Introduction to School-->
-      <section class="welcome-section">
+      <!-- About Us Banner -->
+      <section class="hero-about">
         <div class="container">
-          <h1>Welcome to Wolmer's High School for Girls</h1>
-
-          <p>[SHORT INTRO TO THE SCHOOL]</p>
-
-          <p>Located in [MAIN LOCATION], [PARISH], Jamaica</p>
+          <h1>About Our School</h1>
+          <p>Age Quod Agis</p>
         </div>
       </section>
 
-      <!--History-->
+      <!-- Introduction to School -->
+      <section class="welcome-section">
+        <div class="container">
+          <h1>Welcome to Wolmer's Trust High School for Girls</h1>
+
+          <p>
+            Wolmer's Trust High School for Girls is one of the oldest historic
+            educational institution located in Kingston, Jamaica. With a rich
+            history of education and personal development, the school encourages
+            students to strive for excellence and make significant contributions
+            to society.
+          </p>
+
+          <p>Located at 2A Marescaux Road, Kingston 5, Jamaica.</p>
+        </div>
+      </section>
+
+      <!-- History -->
       <section class="history-section">
         <div class="container">
           <h2>Our History</h2>
 
-          <p>Established in [YEAR], Wolmer's High School for Girls was founded by [FOUNDER]</p>
-          <!--add detailed paragraph here-->
-          <p>[BACKGROUND + HISTORY]</p>
-          <p>[ABOUT 2-3 HISTORICAL DEVELOPMENTS OR/AND MILESTONES]</p>
+          <p>
+            The history of Wolmer's began with John Wolmer, a Kingston goldsmith
+            who, on May 21, 1729, left £2,360 in his will to establish a free
+            school. The Wolmer's Trust was established through an Act in 1736 to
+            administer the school after a series negotiations and court cases.
+          </p>
+
+          <p>
+            Boys and girls used to attend the same institution. But in 1896, the
+            schools were separated, and the Boys' and Girls' schools were given
+            separate administrators. This marked the beginning of Wolmer's Girls
+            as an independent school.
+          </p>
+
+          <p>
+            Due to the 1907 earthquake, which damaged most of the school
+            buildings, the schools had to relocate to their present area which
+            is north of what is now known as the National Heroes Park.
+          </p>
+
+          <p>
+            Other important developments include the completion of Glasspole
+            House in 1984, which is now a shared sixth-form facility for the
+            Girls' and Boys' high schools.
+          </p>
         </div>
       </section>
 
-      <!--Vision & Mission-->
+      <!-- Vision & Mission -->
       <section class="mission-vision">
         <div class="container">
           <h2>Our Mission</h2>
-          <p>[SCHOOL'S MISSION STATEMENT]</p>
+
+          <p>
+            The mission of the Wolmer's Schools is to build well-rounded
+            individuals who are capable of and committed to making a meaningful
+            contribution to society. This is supported through education,
+            positive principals, and providing many opportunities for personal
+            development.
+          </p>
 
           <h2>Our Vision</h2>
-          <p>[SCHOOL'S VISION STATEMENT]</p>
+
+          <p>
+            The Wolmer's Schools aim to provide an academically stimulating
+            environment where students and staff can experience educational,
+            physical, social, spiritual and emotional growth.
+          </p>
+
+          <p>
+            The school's philosophy is that education develops the whole person:
+            Mind, Body and Spirit.
+          </p>
         </div>
       </section>
 
-      <!-- Accomplishments -->
+      <!-- Historical Milestones -->
       <section class="accomplishments-section">
         <div class="container">
-          <h2>Our Accomplishments</h2>
+          <h2>Our Historical Milestones</h2>
 
-          <p>[SHORT INTRO]</p>
+          <p>
+            These milestones emphasize significant events in the history and
+            ongoing expansion of the Wolmer's Trust schools, from John Wolmer's
+            original bequest to present-day accomplishments.
+          </p>
 
-          <div class="accomplishments">
-            <div class="accomplishment">
-              <h3>[AWARD/ACHIEVEMENT #1]</h3>
-              <p>[DESCRIPTION]</p>
-              <p>[YEAR RECEIVED]</p>
+          <div class="accomplishments milestone-grid">
+            <!-- 1729: John Wolmer's Bequest -->
+            <div class="accomplishment milestone-card">
+              <img
+                src="images/wolmersmemorial.jpeg"
+                alt="Memorial to John Wolmer at Kingston Parish Church"
+                class="milestone-image"
+              />
+
+              <h3>1729</h3>
+
+              <p>
+                John Wolmer left £2,360 in his will to establish a free school,
+                laying the foundation for the Wolmer's educational legacy.
+              </p>
+
+              <p class="milestone-caption">John Wolmer's Bequest</p>
             </div>
 
-            <div class="accomplishment">
-              <h3>[AWARD/ACHIEVEMENT #2]</h3>
-              <p>[DESCRIPTION]</p>
-              <p>[YEAR RECEIVED]</p>
+            <!-- 1896: Separate Girls' and Boys' Schools -->
+            <div class="accomplishment milestone-card">
+              <img
+                src="images/wolmersgirls.jpg"
+                alt="Historical postcard showing the old Wolmer's School building in Kingston"
+                class="milestone-image"
+              />
+
+              <h3>1896</h3>
+
+              <p>
+                Wolmer's Girls and Wolmer's Boys became separate schools, each
+                with its own independent administration.
+              </p>
+
+              <p class="milestone-caption">
+                Establishment of the Separate Schools
+              </p>
             </div>
 
-            <div class="accomplishment">
-              <h3>[AWARD/ACHIEVEMENT #3]</h3>
-              <p>[DESCRIPTION]</p>
-              <p>[YEAR RECEIVED]</p>
+            <!-- 1984: Glasspole House -->
+            <div class="accomplishment milestone-card milestone-no-image">
+              <img
+                src="images/wolmersglasspole.jpg"
+                alt="Solar panels installed across the Wolmer's Trust school campuses"
+                class="milestone-image"
+              />
+
+              <h3>1984</h3>
+
+              <p>
+                Glasspole House was completed as a shared sixth-form facility
+                for Wolmer's Girls and Wolmer's Boys
+              </p>
+
+              <p class="milestone-caption">Sixth-Form Development</p>
+            </div>
+
+            <!-- 2024: Solar Energy Development -->
+            <div class="accomplishment milestone-card">
+              <img
+                src="images/wolmer-solar-panels.png"
+                alt="Solar panels installed across the Wolmer's Trust school campuses"
+                class="milestone-image"
+              />
+
+              <h3>2024</h3>
+
+              <p>
+                A solar energy system was commissioned across the three Wolmer's
+                Trust school campuses to support electricity needs.
+              </p>
+
+              <p class="milestone-caption">Solar Energy Development</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!--Teachers' Directory-->
+      <!-- Teachers' Directory -->
+      <!-- These are fictional demonstration profiles -->
       <section class="teacher-directory">
         <div class="container">
           <h2>Meet Our Teachers</h2>
 
-          <p>[SHORT INTRO TO TEACHING STAFF]</p>
+          <p>
+            Our teachers are dedicated to helping students reach their full
+            potential and fostering their academic growth.
+          </p>
+
+          <!-- The following profiles are fictional examples for
+               demonstration purposes. -->
 
           <div class="teachers">
-            <!--#1-->
+            <!-- Teacher 1 -->
             <div class="teacher">
-              <img src="[TEACHER'S IMAGE]" alt="[TEACHER NAME]" />
-              <h3>[TEACHER'S NAME]</h3>
-              <p>Subject/Course: [ASSIGNED SUBJECT]</p>
+              <img src="images/teacher1.jpg" alt="Sample teacher portrait" />
+              <h3>Ms. Danielle Campbell</h3>
+              <p>Subject: Mathematics</p>
             </div>
 
-            <!--#2-->
+            <!-- Teacher 2 -->
             <div class="teacher">
-              <img src="[TEACHER'S IMAGE]" alt="[TEACHER NAME]" />
-              <h3>[TEACHER'S NAME]</h3>
-              <p>Subject/Course: [ASSIGNED SUBJECT]</p>
+              <img src="images/teacher2.jpg" alt="Sample teacher portrait" />
+              <h3>Mrs. Alicia Morgan</h3>
+              <p>Subject: English Language & Literature</p>
             </div>
 
-            <!--#3-->
+            <!-- Teacher 3 -->
             <div class="teacher">
-              <img src="[TEACHER'S IMAGE]" alt="[TEACHER NAME]" />
-              <h3>[TEACHER'S NAME]</h3>
-              <p>Subject/Course: [ASSIGNED SUBJECT]</p>
+              <img src="images/teacher3.jpg" alt="Sample teacher portrait" />
+              <h3>Mr. Daniel Williams</h3>
+              <p>Subject: Information Technology</p>
             </div>
           </div>
         </div>
       </section>
     </main>
 
+    <!-- Footer -->
     <footer>
       <div class="container">
-        <p>&copy; 2026 Wolmer's High School for Girls. All rights reserved.</p>
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
       </div>
     </footer>
   </body>
 </html>
+
+<!--
+  Information Sources:
+
+  1. The Wolmer's Trust - Official History
+     https://www.wolmers.org/trust/history/
+
+  2. The Wolmer's Trust - Official Schools Information
+     https://www.wolmers.org/trust/schools/
+
+  3. The Wolmer's Trust - School Philosophy, Mission and Vision
+     https://www.wolmers.org/wp/philosophy/
+
+  Image Sources:
+
+  1. John Wolmer memorial & Illustration of the School
+     https://www.wolmers.org/trust/history/
+
+  2. Solar panel photograph:
+    https://www.jamaicaobserver.com/2024/11/22/wolmers-schools-get-us445000-solar-electricity-generation-system/
+
+  4. Teacher portraits:
+     https://www.pexels.com/
+
+  Note: Teacher portraits and profiles are used for
+  demonstration purposes only. They do not represent
+  actual members of Wolmer's Girls staff.
+-->
