@@ -7,14 +7,14 @@
   Stylesheet for Portal
 */
 
-/*General*/
+/* General */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/*Variables for design*/
+/* Variables for design */
 :root {
   --primary-colour: #800000;
   --secondary-colour: #ffd700;
@@ -40,7 +40,7 @@
   --container-width: 1200px;
 }
 
-/*Base styling*/
+/* Base styling */
 html {
   scroll-behavior: smooth;
 }
@@ -73,14 +73,14 @@ p {
   color: var(--muted-text);
 }
 
-/*Layout*/
+/* Layout */
 .container {
   width: 90%;
   max-width: var(--container-width);
   margin: 0 auto;
 }
 
-/*Navigation*/
+/* Navigation */
 header {
   padding: var(--spacing-medium) 0;
   background-color: var(--card-colour);
@@ -132,7 +132,7 @@ nav a:focus-visible {
   outline-offset: 4px;
 }
 
-/*Buttons*/
+/* Buttons */
 .button {
   display: inline-block;
   padding: 12px 24px;
@@ -154,20 +154,20 @@ nav a:focus-visible {
   outline-offset: 4px;
 }
 
-/*Images*/
+/* Images */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/*Links*/
+/* Links */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/*Form*/
+/* Form */
 button,
 input,
 select,
@@ -175,9 +175,11 @@ textarea {
   font: inherit;
 }
 
-/*Homepage*/
+/* =========================
+   HOMEPAGE
+========================= */
 
-/*Hero banner*/
+/* Hero banner */
 .hero-home {
   background-image:
     linear-gradient(rgba(40, 0, 0, 0.55), rgba(40, 0, 0, 0.55)),
@@ -226,7 +228,7 @@ textarea {
   color: var(--primary-colour);
 }
 
-/*Section headings*/
+/* Section headings */
 .section-label {
   color: var(--primary-colour);
   font-size: 13px;
@@ -234,7 +236,7 @@ textarea {
   letter-spacing: 2px;
 }
 
-/*Welcome section*/
+/* Welcome section */
 .welcome-section {
   padding: 70px 0;
   text-align: center;
@@ -242,7 +244,7 @@ textarea {
   margin: 0 auto;
 }
 
-/*About preview on homepage*/
+/* About preview on homepage */
 .home-about {
   background-color: var(--card-colour);
   padding: var(--spacing-sections) 0;
@@ -265,7 +267,7 @@ textarea {
   padding: var(--spacing-large);
 }
 
-/*School highlights*/
+/* School highlights */
 .school-highlights {
   padding: var(--spacing-sections) 0;
   text-align: center;
@@ -290,7 +292,7 @@ textarea {
   color: var(--primary-colour);
 }
 
-/*Notable Alumna Section*/
+/* Notable Alumna Section */
 .alumna-section {
   padding: var(--spacing-sections) 0;
   background-color: var(--card-colour);
@@ -327,14 +329,14 @@ textarea {
   line-height: 1.8;
 }
 
-/*Text links*/
+/* Text links */
 .text-link {
   color: var(--primary-colour);
   font-weight: bold;
   text-decoration: underline;
 }
 
-/*Portal section*/
+/* Portal section */
 .portal-section {
   background-image:
     linear-gradient(rgba(40, 0, 0, 0.7), rgba(40, 0, 0, 0.7)),
@@ -369,9 +371,11 @@ textarea {
   color: var(--primary-colour);
 }
 
-/*About Us Page*/
+/* =========================
+   ABOUT US PAGE
+========================= */
 
-/*About page banner*/
+/* About page banner */
 .hero-about {
   background-image:
     linear-gradient(rgba(40, 0, 0, 0.55), rgba(40, 0, 0, 0.55)),
@@ -399,13 +403,13 @@ textarea {
   letter-spacing: 2px;
 }
 
-/*About introduction spacing*/
+/* About introduction spacing */
 .hero-about + .welcome-section {
   padding-top: 50px;
   padding-bottom: 25px;
 }
 
-/*History section*/
+/* History section */
 .history-section {
   background-color: var(--background-colour);
   padding: 25px 0 75px;
@@ -436,7 +440,7 @@ textarea {
   margin-bottom: 22px;
 }
 
-/*Mission and vision*/
+/* Mission and vision */
 .mission-vision {
   background-color: var(--card-colour);
   padding: 75px 0;
@@ -462,7 +466,7 @@ textarea {
   line-height: 1.9;
 }
 
-/*Historical milestones*/
+/* Historical milestones */
 .accomplishments-section {
   background-color: var(--background-colour);
   padding: 75px 0;
@@ -507,6 +511,16 @@ textarea {
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
+/* Milestone images */
+.accomplishment img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-medium);
+}
+
 .accomplishment h3 {
   color: var(--primary-colour);
   font-size: 32px;
@@ -525,23 +539,32 @@ textarea {
   padding-top: var(--spacing-small);
 }
 
-/*Special maroon milestone card*/
+/* Maroon styling for the 1729 and 1984 milestone cards */
+.accomplishment:first-child,
 .accomplishment:nth-child(3) {
   background-color: var(--primary-colour);
   color: var(--card-colour);
   border-top: 5px solid var(--secondary-colour);
 }
 
+.accomplishment:first-child h3,
+.accomplishment:first-child p:last-child,
 .accomplishment:nth-child(3) h3,
 .accomplishment:nth-child(3) p:last-child {
   color: var(--secondary-colour);
 }
 
+.accomplishment:first-child p:last-child,
 .accomplishment:nth-child(3) p:last-child {
   border-top-color: rgba(255, 255, 255, 0.35);
 }
 
-/*Teacher directory*/
+/* Centre the fourth milestone card (2024 solar panels) */
+.accomplishment:last-child {
+  grid-column: 2;
+}
+
+/* Teacher directory */
 .teacher-directory {
   background-color: var(--card-colour);
   padding: 75px 0;
@@ -573,10 +596,13 @@ textarea {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Teacher images */
 .teacher img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 240px;
+  object-fit: contain;
+  object-position: center;
+  background-color: #f7f3ed;
   border-radius: var(--border-radius);
   margin-bottom: var(--spacing-medium);
 }
@@ -592,14 +618,17 @@ textarea {
   color: var(--muted-text);
 }
 
-/*Contact Us Page*/
+/* =========================
+   CONTACT US PAGE
+========================= */
+
 .contact-banner {
   background-color: var(--primary-colour);
   padding: 70px 20px;
   text-align: center;
 }
 
-/*Contact Us heading*/
+/* Contact Us heading */
 .contact-banner h1.contact-title {
   color: var(--secondary-colour);
   font-family: var(--heading-font);
@@ -667,7 +696,7 @@ textarea {
   border-color: var(--primary-colour);
 }
 
-/*Submit button*/
+/* Submit button */
 .actions {
   text-align: center;
 }
@@ -684,7 +713,10 @@ textarea {
   color: var(--primary-colour);
 }
 
-/*Login Page*/
+/* =========================
+   LOGIN PAGE
+========================= */
+
 .login-welcome {
   background:
     linear-gradient(rgba(40, 0, 0, 0.6), rgba(40, 0, 0, 0.6)),
@@ -760,13 +792,44 @@ textarea {
   color: #800000;
 }
 
-/*Footer*/
+/* Dashboard cards */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-large);
+  align-items: stretch;
+}
+
+.card {
+  padding: var(--spacing-large);
+  background-color: var(--card-colour);
+  border: 1px solid var(--border-colour);
+  border-top: 5px solid var(--secondary-colour);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card h2,
+.card h3 {
+  color: var(--primary-colour);
+  margin-bottom: var(--spacing-medium);
+}
+
+.card p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Footer */
 footer {
   padding: var(--spacing-large) 0;
   text-align: center;
 }
 
-/*Responsive design*/
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
 @media screen and (max-width: 768px) {
   header .container {
     flex-direction: column;
@@ -786,8 +849,14 @@ footer {
   .accomplishments,
   .teachers,
   .home-about-content,
-  .highlight-grid {
+  .highlight-grid,
+  .dashboard-cards {
     grid-template-columns: 1fr;
+  }
+
+  /* Reset desktop centering for the solar milestone */
+  .accomplishment:last-child {
+    grid-column: auto;
   }
 
   .hero-content h1 {
@@ -857,7 +926,7 @@ footer {
   }
 }
 
-/*Payment status colours*/
+/* Payment status colours */
 .status-paid {
   background-color: #d4edda;
   color: #155724;
