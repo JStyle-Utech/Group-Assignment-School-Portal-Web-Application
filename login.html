@@ -2,7 +2,12 @@
 <!--
   CIT2011 Web Programming - School Portal Group Project
   File: login.html
-  Group Members: [NAMES AND ID NUMBERS]
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
   Lab: FRIDAY 12PM
 
   Portal Login Page
@@ -48,12 +53,13 @@
         </div>
       </section>
 
-      <!--Login Form-->
-      <section class="login-section">
+     
+       <!--Login Section-->
+      <section class="login-section" id="loginSection">
         <div class="container">
           <h2>Portal Login</h2>
 
-          <form id="login-form">
+          <form id="login-form" autocomplete="off">
             <div class="field">
               <label for="username">Username</label>
               <input
@@ -61,6 +67,7 @@
                 id="username"
                 name="username"
                 placeholder="Enter your username"
+                autocomplete="username"
                 required
               />
             </div>
@@ -72,17 +79,119 @@
                 id="password"
                 name="password"
                 placeholder="Enter your password"
+                autocomplete="current-password"
                 required
               />
             </div>
 
             <!--Error message shown by auth.js-->
-            <p id="loginMessage" role="alert"></p>
+            <p id="loginMessage" class="form-message" role="alert"></p>
 
             <div class="actions">
               <button type="submit" class="button">Log In</button>
             </div>
           </form>
+
+          <!--Switch to the create account form-->
+          <p class="form-switch">
+            <button type="button" id="showCreateAdmin" class="button button-secondary">
+              Create Admin account
+            </button>
+          </p>
+        </div>
+      </section>
+
+      <!--Create Admin Account Section (hidden until requested)-->
+      <section class="login-section" id="adminSection" hidden>
+        <div class="container">
+          <h2>Create Admin Account</h2>
+
+          <form id="admin-form" autocomplete="off">
+            <div class="field">
+              <label for="adminFullName">Full Name</label>
+              <input
+                type="text"
+                id="adminFullName"
+                name="adminFullName"
+                placeholder="Enter your full name"
+                autocomplete="off"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="adminUsername">Username</label>
+              <input
+                type="text"
+                id="adminUsername"
+                name="adminUsername"
+                placeholder="For example ann_lee"
+                autocomplete="off"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="adminEmail">Email Address</label>
+              <input
+                type="email"
+                id="adminEmail"
+                name="adminEmail"
+                placeholder="you@email.com"
+                autocomplete="off"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="adminRole">Role</label>
+              <select id="adminRole" name="adminRole" required>
+                <option value="">Select a role...</option>
+                <option value="admin">Administrator</option>
+                <option value="teacher">Teacher</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="adminPassword">Password</label>
+              <input
+                type="password"
+                id="adminPassword"
+                name="adminPassword"
+                placeholder="Choose a password"
+                autocomplete="new-password"
+                required
+              />
+              <small class="field-help" id="adminPasswordHelp" data-hint="At least 8 characters, with a letter and a number." data-good="Password is strong enough." aria-live="polite">At least 8 characters, with a letter and a number.</small>
+            </div>
+
+            <div class="field">
+              <label for="adminConfirm">Confirm Password</label>
+              <input
+                type="password"
+                id="adminConfirm"
+                name="adminConfirm"
+                placeholder="Re-enter your password"
+                autocomplete="new-password"
+                required
+              />
+              <small class="field-help" id="adminConfirmHelp" data-hint="Type the same password again." data-good="Passwords match." aria-live="polite">Type the same password again.</small>
+            </div>
+
+            <!--Message shown by auth.js-->
+            <p id="adminMessage" class="form-message" role="alert"></p>
+
+            <div class="actions">
+              <button type="submit" class="button">Create Account</button>
+            </div>
+          </form>
+
+          <!--Switch back to the login form-->
+          <p class="form-switch">
+            <button type="button" id="showLogin" class="button button-secondary">
+              Back to Login
+            </button>
+          </p>
         </div>
       </section>
     </main>

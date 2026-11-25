@@ -751,7 +751,8 @@ textarea {
   margin: 0 auto 25px;
 }
 
-#login-form {
+#login-form,
+#admin-form {
   max-width: 500px;
   margin: 25px auto;
   padding: 30px;
@@ -760,24 +761,28 @@ textarea {
   border-radius: 8px;
 }
 
-#login-form .field {
+#login-form .field,
+#admin-form .field {
   text-align: left;
 }
 
-#login-form label {
+#login-form label,
+#admin-form label {
   display: block;
   text-align: left;
   margin-bottom: 8px;
 }
 
-#login-form input {
+#login-form input,
+#admin-form input {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-#login-form .button {
+#login-form .button,
+#admin-form .button {
   width: 100%;
   background-color: #800000;
   color: white;
@@ -787,7 +792,8 @@ textarea {
   transition: background-color 0.3s;
 }
 
-#login-form .button:hover {
+#login-form .button:hover,
+#admin-form .button:hover {
   background-color: #ffd700;
   color: #800000;
 }
@@ -889,6 +895,7 @@ footer {
   }
 
   #login-form,
+  #admin-form,
   #contact-form {
     width: 100%;
     padding: 20px;
@@ -924,6 +931,656 @@ footer {
   .contact-banner h1.contact-title {
     font-size: 36px;
   }
+}
+
+/* Hidden elements stay hidden even when a class sets display */
+[hidden] {
+  display: none !important;
+}
+
+/* Form feedback messages (login / create admin) */
+.form-message {
+  white-space: pre-line;
+  min-height: 1.4em;
+  font-size: 15px;
+  text-align: left;
+}
+
+.form-message.error {
+  color: #721c24;
+}
+
+.form-message.success {
+  color: var(--accent-colour);
+  font-weight: bold;
+}
+
+.form-switch {
+  text-align: center;
+  margin-top: var(--spacing-medium);
+}
+
+/* =========================
+   ADMIN PAGES (dashboard, students, grades, finance)
+========================= */
+
+/* Banner */
+.admin-banner {
+  background:
+    linear-gradient(rgba(40, 0, 0, 0.6), rgba(40, 0, 0, 0.6)),
+    url("../images/wolmershero.jpg");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 55px 20px;
+  color: var(--card-colour);
+}
+
+.admin-banner h1 {
+  color: var(--secondary-colour);
+  font-size: 48px;
+  margin-bottom: var(--spacing-small);
+}
+
+.admin-banner p {
+  margin-bottom: 0;
+}
+
+.admin-welcome {
+  margin-top: var(--spacing-small);
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+/* Page layout */
+.admin-main {
+  padding: var(--spacing-sections) 0;
+}
+
+.admin-main .layout {
+  display: grid;
+  gap: var(--spacing-large);
+}
+
+/* Panels use the same card look as the rest of the site */
+.panel {
+  background-color: var(--card-colour);
+  border: 1px solid var(--border-colour);
+  border-top: 5px solid var(--secondary-colour);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-large);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.panel h2 {
+  color: var(--primary-colour);
+  font-size: 28px;
+}
+
+/* Panel with a school photo beside the cohort summary */
+.summary-panel {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--spacing-large);
+  align-items: center;
+}
+
+.summary-panel img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+}
+
+.summary-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--spacing-medium);
+}
+
+.summary-list li {
+  background-color: #f7f3ed;
+  border-left: 4px solid var(--primary-colour);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-medium);
+  color: var(--muted-text);
+}
+
+.summary-list strong {
+  display: block;
+  color: var(--primary-colour);
+  font-family: var(--heading-font);
+  font-size: 28px;
+}
+
+/* Registration form: two columns on desktop */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: var(--spacing-large);
+}
+
+.form-grid .wide {
+  grid-column: 1 / -1;
+}
+
+.panel .field label {
+  display: block;
+  margin-bottom: var(--spacing-small);
+  font-weight: bold;
+  color: var(--primary-colour);
+}
+
+.panel .field input,
+.panel .field select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-colour);
+  border-radius: var(--border-radius);
+  background-color: var(--card-colour);
+}
+
+.panel .field input:focus,
+.panel .field select:focus,
+.toolbar input:focus,
+.toolbar select:focus {
+  outline: 2px solid var(--secondary-colour);
+  outline-offset: 2px;
+  border-color: var(--primary-colour);
+}
+
+.panel .field input.invalid,
+.panel .field select.invalid {
+  border-color: #721c24;
+  background-color: #fdf3f4;
+}
+
+.error {
+  display: block;
+  min-height: 1.2em;
+  margin-top: 4px;
+  font-size: 14px;
+  color: #721c24;
+}
+
+/* Buttons used by the registry (btn / btn primary) */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  background-color: var(--card-colour);
+  color: var(--primary-colour);
+  border: 2px solid var(--primary-colour);
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.btn:hover {
+  background-color: var(--secondary-colour);
+  border-color: var(--secondary-colour);
+  color: var(--primary-colour);
+}
+
+.btn.primary {
+  background-color: var(--primary-colour);
+  color: var(--card-colour);
+}
+
+.btn.primary:hover {
+  background-color: var(--accent-colour);
+  border-color: var(--accent-colour);
+  color: var(--card-colour);
+}
+
+.btn:focus-visible,
+.sort:focus-visible {
+  outline: 2px solid var(--secondary-colour);
+  outline-offset: 3px;
+}
+
+.btn.small {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.btn.danger {
+  color: #721c24;
+  border-color: #721c24;
+}
+
+.btn.danger:hover {
+  background-color: #721c24;
+  border-color: #721c24;
+  color: var(--card-colour);
+}
+
+.form-grid .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small);
+  justify-content: flex-start;
+}
+
+.message {
+  grid-column: 1 / -1;
+  margin-top: var(--spacing-medium);
+  margin-bottom: 0;
+  font-weight: bold;
+  color: var(--accent-colour);
+}
+
+.message.error {
+  color: #721c24;
+}
+
+/* Search and filter toolbar */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-small);
+  margin-bottom: var(--spacing-medium);
+}
+
+.toolbar input[type="search"] {
+  flex: 1 1 240px;
+}
+
+.toolbar input,
+.toolbar select {
+  padding: 10px 12px;
+  border: 1px solid var(--border-colour);
+  border-radius: var(--border-radius);
+  background-color: var(--card-colour);
+}
+
+.count {
+  margin-left: auto;
+  color: var(--muted-text);
+  font-size: 14px;
+}
+
+/* Student table */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.data-table th {
+  background-color: var(--primary-colour);
+  color: var(--card-colour);
+  text-align: left;
+  padding: 12px;
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-colour);
+  vertical-align: middle;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background-color: #f7f3ed;
+}
+
+.data-table tbody tr:hover {
+  background-color: #fff8d6;
+}
+
+.sort {
+  background: none;
+  border: none;
+  color: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sort:hover {
+  color: var(--secondary-colour);
+}
+
+/* Footer on the registry page keeps the maroon school colour */
+.admin-footer {
+  background-color: var(--primary-colour);
+  color: var(--card-colour);
+}
+
+/* Visually hidden text for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .admin-banner h1 {
+    font-size: 36px;
+  }
+
+  .summary-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Admin navigation: current page ---- */
+nav a.active {
+  color: var(--primary-colour);
+  border-bottom: 3px solid var(--secondary-colour);
+  padding-bottom: 4px;
+}
+
+/* ---- Extra buttons ---- */
+.button-secondary {
+  background-color: var(--secondary-colour);
+  color: var(--primary-colour);
+}
+
+.button-secondary:hover {
+  background-color: var(--primary-colour);
+  color: var(--card-colour);
+}
+
+.form-switch .button {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Role drop-down on the create admin form */
+#admin-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+}
+
+/* ---- Dashboard ---- */
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-medium);
+}
+
+.dashboard-cards .card .button {
+  margin-top: var(--spacing-small);
+}
+
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-large);
+  margin-bottom: var(--spacing-medium);
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--heading-font);
+  font-size: 30px;
+  color: var(--primary-colour);
+  line-height: 1.2;
+}
+
+.stat span {
+  font-size: 14px;
+  color: var(--muted-text);
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small);
+}
+
+/* Bars used for cohorts and subject averages */
+.bar-list {
+  list-style: none;
+  margin-bottom: var(--spacing-medium);
+}
+
+.bar-list li {
+  display: grid;
+  grid-template-columns: 170px 1fr 60px;
+  gap: var(--spacing-small);
+  align-items: center;
+  margin-bottom: var(--spacing-small);
+  font-size: 15px;
+}
+
+.bar-track {
+  background-color: #eee;
+  border-radius: 999px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  background-color: var(--primary-colour);
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s;
+}
+
+.bar-value {
+  text-align: right;
+  font-weight: bold;
+  color: var(--primary-colour);
+}
+
+/* Small filter buttons */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small);
+  margin-bottom: var(--spacing-medium);
+}
+
+.pill {
+  padding: 6px 16px;
+  border: 2px solid var(--primary-colour);
+  border-radius: 999px;
+  background-color: var(--card-colour);
+  color: var(--primary-colour);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pill:hover,
+.pill.active {
+  background-color: var(--primary-colour);
+  color: var(--card-colour);
+}
+
+.panel-link {
+  display: inline-block;
+  margin-top: var(--spacing-small);
+  color: var(--primary-colour);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.empty-note {
+  padding: var(--spacing-medium);
+  background-color: #f7f3ed;
+  border-radius: var(--border-radius);
+  color: var(--muted-text);
+  text-align: center;
+}
+
+/* ---- Status badges (Paid / Pending / Outstanding) ---- */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.badge.flash {
+  animation: flash-badge 0.6s ease-in-out 4;
+}
+
+@keyframes flash-badge {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.15);
+  }
+}
+
+/* ---- Summary boxes (finance) ---- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--spacing-medium);
+}
+
+.stat-box {
+  background-color: var(--card-colour);
+  border: 1px solid var(--border-colour);
+  border-top: 5px solid var(--secondary-colour);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-medium);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stat-box strong {
+  display: block;
+  font-family: var(--heading-font);
+  font-size: 26px;
+  color: var(--primary-colour);
+}
+
+.stat-box span {
+  font-size: 14px;
+  color: var(--muted-text);
+}
+
+/* ---- Grades ---- */
+.score-input {
+  width: 90px;
+  padding: 8px;
+  border: 1px solid var(--border-colour);
+  border-radius: var(--border-radius);
+}
+
+.score-input.invalid {
+  border-color: #721c24;
+  background-color: #fdf3f4;
+}
+
+.grade-a { background-color: #d4edda; color: #155724; }
+.grade-b { background-color: #e2f0d9; color: #2d5a1e; }
+.grade-c { background-color: #fff3cd; color: #856404; }
+.grade-d { background-color: #ffe5c2; color: #8a4b08; }
+.grade-e,
+.grade-f { background-color: #f8d7da; color: #721c24; }
+
+.matrix-wrap {
+  overflow-x: auto;
+}
+
+.matrix td,
+.matrix th {
+  text-align: center;
+}
+
+.matrix td:first-child,
+.matrix th:first-child {
+  text-align: left;
+}
+
+.form-note {
+  color: var(--muted-text);
+  font-size: 15px;
+}
+
+.inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-medium);
+  align-items: flex-end;
+  margin-bottom: var(--spacing-medium);
+}
+
+.inline-form .field {
+  flex: 1 1 200px;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .bar-list li {
+    grid-template-columns: 110px 1fr 50px;
+  }
+
+  nav a.active {
+    padding-bottom: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge.flash {
+    animation: none;
+  }
+
+  .bar-fill {
+    transition: none;
+  }
+}
+
+/* ---- Help and error line under each field of the create account form ---- */
+.field-help {
+  display: block;
+  min-height: 1.3em;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted-text);
+  text-align: left;
+}
+
+.field-help.bad {
+  color: #721c24;
+  font-weight: bold;
+}
+
+.field-help.good {
+  color: var(--accent-colour);
+  font-weight: bold;
+}
+
+#admin-form input.invalid,
+#admin-form select.invalid {
+  border-color: #721c24;
+  background-color: #fdf3f4;
+}
+
+#admin-form input.valid,
+#admin-form select.valid {
+  border-color: var(--accent-colour);
 }
 
 /* Payment status colours */

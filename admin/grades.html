@@ -1,0 +1,191 @@
+<!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
+  File: grades.html
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
+  Academic Matrix - enter, store and manage student grades by subject
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academic Matrix | Wolmer's Girls School Portal</title>
+    <link rel="stylesheet" href="css/masterstylesheet.css" />
+  </head>
+
+  <body>
+    <!--Navigation-->
+    <header>
+      <div class="container">
+        <a href="index.html" class="logo">
+          <img
+            src="images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
+
+        <nav aria-label="Administrator navigation">
+          <ul>
+            <li><a href="dashboard.html">DASHBOARD</a></li>
+            <li><a href="students.html">STUDENT REGISTRY</a></li>
+            <li><a href="grades.html" class="active" aria-current="page">ACADEMIC MATRIX</a></li>
+            <li><a href="finance.html">FINANCIAL LEDGER</a></li>
+            <li><a href="login.html" id="logoutLink">LOG OUT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!--Page banner-->
+    <section class="admin-banner">
+      <div class="container">
+        <h1>Academic Matrix</h1>
+        <p>Enter and manage student grades for each subject</p>
+        <p class="admin-welcome" id="adminWelcome"></p>
+      </div>
+    </section>
+
+    <main class="admin-main">
+      <div class="container layout">
+        <!-- Enter grades: one score box for each student -->
+        <section class="panel" aria-labelledby="entryHeading">
+          <h2 id="entryHeading">Enter grades</h2>
+          <p class="form-note">
+            Choose a subject and an assessment, type each score from 0 to 100,
+            then press Save grades. Leave a box empty to remove that grade.
+            Only active students are listed.
+          </p>
+
+          <div class="inline-form">
+            <div class="field">
+              <label for="entrySubject">Subject</label>
+              <select id="entrySubject">
+                <option value="">Select...</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="entryAssessment">Assessment</label>
+              <select id="entryAssessment"></select>
+            </div>
+            <div class="field">
+              <label for="entryCohort">Cohort</label>
+              <select id="entryCohort">
+                <option value="">All cohorts</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="entryGradeLevel">Grade / form</label>
+              <select id="entryGradeLevel">
+                <option value="">All grades</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Score entry grid</caption>
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Score (%)</th>
+                  <th scope="col">Letter</th>
+                </tr>
+              </thead>
+              <tbody id="entryBody"></tbody>
+            </table>
+          </div>
+
+          <p class="actions">
+            <button type="button" id="saveGradesBtn" class="btn primary">Save grades</button>
+          </p>
+          <p id="entryMessage" class="message" role="status"></p>
+        </section>
+
+        <!-- Academic matrix: students down the side, subjects across the top -->
+        <section class="panel" aria-labelledby="matrixHeading">
+          <h2 id="matrixHeading">Academic matrix</h2>
+          <div class="toolbar">
+            <label for="matrixSearch" class="sr-only">Search students</label>
+            <input type="search" id="matrixSearch" placeholder="Search by name or ID" />
+            <label for="matrixCohort" class="sr-only">Filter by cohort</label>
+            <select id="matrixCohort">
+              <option value="">All cohorts</option>
+            </select>
+            <label for="matrixAssessment" class="sr-only">Filter by assessment</label>
+            <select id="matrixAssessment">
+              <option value="">All assessments (average)</option>
+            </select>
+            <span id="matrixCount" class="count" aria-live="polite"></span>
+          </div>
+
+          <div class="matrix-wrap">
+            <table class="data-table matrix">
+              <caption class="sr-only">Average score for each student in each subject</caption>
+              <thead id="matrixHead"></thead>
+              <tbody id="matrixBody"></tbody>
+            </table>
+          </div>
+          <p class="form-note">
+            Colours: green is A or B, yellow is C, orange is D, red is E or F.
+          </p>
+        </section>
+
+        <!-- Every saved grade -->
+        <section class="panel" aria-labelledby="recordsHeading">
+          <h2 id="recordsHeading">Saved grade records</h2>
+          <div class="toolbar">
+            <label for="recordSearch" class="sr-only">Search records</label>
+            <input type="search" id="recordSearch" placeholder="Search by name or ID" />
+            <label for="recordSubject" class="sr-only">Filter by subject</label>
+            <select id="recordSubject">
+              <option value="">All subjects</option>
+            </select>
+            <span id="recordCount" class="count" aria-live="polite"></span>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Saved grade records</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Student</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Assessment</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Letter</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="recordBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="admin-footer">
+      <div class="container">
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!--storage.js must load before auth.js, and both before the page script-->
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      // Only logged-in administrators can use this page
+      protectAdminPage();
+    </script>
+    <script src="js/grades.js"></script>
+  </body>
+</html>

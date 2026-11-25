@@ -1,0 +1,132 @@
+<!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
+  File: teacher/dashboard.html
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
+  Teacher Dashboard - summary and a subject view of students and their scores
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Dashboard | Wolmer's Girls School Portal</title>
+    <link rel="stylesheet" href="../css/masterstylesheet.css" />
+  </head>
+
+  <body>
+    <!--Navigation (this page is inside the teacher folder, so links start with ../)-->
+    <header>
+      <div class="container">
+        <a href="../index.html" class="logo">
+          <img
+            src="../images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
+
+        <nav aria-label="Teacher navigation">
+          <ul>
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="dashboard.html" class="active" aria-current="page">TEACHER DASHBOARD</a></li>
+            <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!--Page banner-->
+    <section class="admin-banner">
+      <div class="container">
+        <h1>Teacher Dashboard</h1>
+        <p>Choose a subject to see your students and their scores</p>
+        <p class="admin-welcome" id="adminWelcome"></p>
+      </div>
+    </section>
+
+    <main class="admin-main">
+      <div class="container layout">
+        <!-- Summary cards -->
+        <section class="dashboard-cards" aria-label="Summary">
+          <article class="card">
+            <h2>Active students</h2>
+            <div class="stat-row">
+              <div class="stat"><strong id="statStudents">0</strong><span>Students</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2>Grades saved</h2>
+            <div class="stat-row">
+              <div class="stat"><strong id="statGrades">0</strong><span>Scores</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2>Subjects</h2>
+            <div class="stat-row">
+              <div class="stat"><strong id="statSubjects">0</strong><span>Offered</span></div>
+            </div>
+          </article>
+        </section>
+
+        <!-- Subject view -->
+        <section class="panel" aria-labelledby="subjectHeading">
+          <h2 id="subjectHeading">My subject</h2>
+          <div class="inline-form">
+            <div class="field">
+              <label for="teacherSubject">Subject</label>
+              <select id="teacherSubject">
+                <option value="">Select...</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="teacherAssessment">Assessment</label>
+              <select id="teacherAssessment">
+                <option value="">All assessments (average)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Students and their scores for the chosen subject</caption>
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Scores saved</th>
+                  <th scope="col">Average</th>
+                  <th scope="col">Letter</th>
+                </tr>
+              </thead>
+              <tbody id="teacherBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="admin-footer">
+      <div class="container">
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!--storage.js must load before auth.js, and both before the page script-->
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+      // Only logged-in teachers can use this page
+      protectTeacherPage();
+    </script>
+    <script src="../js/teacher.js"></script>
+  </body>
+</html>
