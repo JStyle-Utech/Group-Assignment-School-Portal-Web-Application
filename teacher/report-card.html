@@ -1,44 +1,183 @@
 <!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
+  File: teacher/report-card.html
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
+  Report Card Generator - shows one student's saved scores, averages and grades on screen
+-->
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Student Report Cards | School Portal</title>
-    <link rel="stylesheet" href="../css/teacher.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#800000" />
+    <title>Student Report Cards | Wolmer's Girls School Portal</title>
+    <link rel="stylesheet" href="../css/masterstylesheet.css" />
   </head>
-  <body>
-    <header class="top">
-      <div class="wrap">
-        <strong>School Portal • Teacher Area</strong
-        ><span id="teacherName">Teacher</span>
+
+  <body class="admin-page">
+    <a class="skip-link" href="#main">Skip to the main content</a>
+
+    <!--Navigation (this page is inside a folder, so links to other folders start with ../)-->
+    <header>
+      <div class="container">
+        <a href="../index.html" class="logo">
+          <img
+            src="../images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="adminNav"
+        >
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          Menu
+        </button>
+
+        <nav id="adminNav" aria-label="Teacher navigation">
+          <ul>
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="dashboard.html">TEACHER DASHBOARD</a></li>
+            <li><a href="subjects.html">SUBJECTS</a></li>
+            <li><a href="grade-entry.html">GRADE ENTRY</a></li>
+            <li><a href="report-card.html" class="active" aria-current="page">REPORT CARDS</a></li>
+            <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
-    <nav class="nav wrap" aria-label="Teacher navigation">
-      <a href="dashboard.html">Dashboard</a><a href="subjects.html">Subjects</a
-      ><a href="grade-entry.html">Grade Entry</a
-      ><a href="report-card.html">Report Cards</a
-      ><button type="button" id="logoutButton">Log out</button>
-    </nav>
-    <main class="wrap">
-      <h1>Student Report Cards</h1>
-      <p class="intro">
-        Select a student to see all saved subject marks and their arithmetic
-        mean.
-      </p>
-      <section class="panel">
-        <label>Student<select id="studentSelect"></select></label>
-        <div id="reportOutput" aria-live="polite"></div>
-        <button class="button" id="printButton" type="button">
-          Print report card
-        </button>
-      </section>
+
+    <!--Page banner-->
+    <section class="admin-banner">
+      <div class="container">
+        <h1>Student Report Cards</h1>
+        <p>Make a report card from the scores saved for a student</p>
+        <p class="admin-welcome" id="adminWelcome"></p>
+      </div>
+    </section>
+
+    <main class="admin-main" id="main">
+      <div class="container layout">
+        <section class="panel no-print" aria-labelledby="pickHeading">
+          <h2 id="pickHeading">Generate a report card</h2>
+          <p class="form-note">
+            Choose a student to see every saved score and the average for each subject.
+          </p>
+          <div class="inline-form">
+            <div class="field">
+              <label for="reportLevel">Grade level</label>
+              <select id="reportLevel">
+                <option value="">All grade levels</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="studentSelect">Student</label>
+              <select id="studentSelect">
+                <option value="">Select...</option>
+              </select>
+            </div>
+            <div class="field">
+              <button type="button" class="btn primary" id="generateBtn">Generate</button>
+            </div>
+            <div class="field">
+              <button type="button" class="btn" id="printButton" disabled>Print report card</button>
+            </div>
+          </div>
+          <p class="message" id="reportMessage" role="status"></p>
+        </section>
+
+        <!-- The report card (filled in by teacher-report.js) -->
+        <section class="panel report-sheet" id="reportCard" aria-label="Student report card" hidden>
+          <div class="report-head">
+            <img src="../images/wolmers-logo%203.png" alt="" />
+            <div>
+              <h2>Wolmer's Girls School</h2>
+              <p>Student Report Card</p>
+            </div>
+          </div>
+
+          <dl class="profile-list report-meta">
+            <dt>Student</dt>
+            <dd id="cardName">-</dd>
+            <dt>Student ID</dt>
+            <dd id="cardId">-</dd>
+            <dt>Grade level</dt>
+            <dd id="cardGrade">-</dd>
+            <dt>Cohort</dt>
+            <dd id="cardCohort">-</dd>
+            <dt>Guardian</dt>
+            <dd id="cardGuardian">-</dd>
+            <dt>Date printed</dt>
+            <dd id="cardDate">-</dd>
+          </dl>
+
+          <div class="table-wrap">
+            <table class="data-table report-table">
+              <caption class="sr-only">Scores and averages for each subject</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Test 1</th>
+                  <th scope="col">Test 2</th>
+                  <th scope="col">Mid-Year Exam</th>
+                  <th scope="col">Final Exam</th>
+                  <th scope="col">Coursework</th>
+                  <th scope="col">Average</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Remark</th>
+                </tr>
+              </thead>
+              <tbody id="reportBody"></tbody>
+            </table>
+          </div>
+
+          <div class="stat-grid report-summary">
+            <div class="stat-box"><strong id="cardOverall">-</strong><span>Overall average</span></div>
+            <div class="stat-box"><strong id="cardLetter">-</strong><span>Overall grade</span></div>
+            <div class="stat-box"><strong id="cardCount">-</strong><span>Subjects graded</span></div>
+            <div class="stat-box"><strong id="cardBest">-</strong><span>Strongest subject</span></div>
+            <div class="stat-box"><strong id="cardWorst">-</strong><span>Needs most support</span></div>
+          </div>
+
+          <h3 class="report-subheading">Average by subject</h3>
+          <ul class="bar-list" id="cardBars"></ul>
+
+          <p class="report-remark" id="cardRemark"></p>
+          <p class="report-sign">Prepared by: <strong id="cardTeacher">-</strong></p>
+          <p class="form-note">
+            Grades: A is 80 and above, B is 70 to 79, C is 60 to 69, D is 50 to 59, E is 40 to 49, F is below 40.
+            The overall average is the average of the subject averages.
+          </p>
+        </section>
+      </div>
     </main>
-    <footer class="wrap footer">
-      CIT2011 group project • Teacher Module • Demonstration with mock browser
-      data
+
+    <footer class="admin-footer">
+      <div class="container">
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
+      </div>
     </footer>
+
+    <!--storage.js must load before auth.js, and both before the page script-->
     <script src="../js/storage.js"></script>
     <script src="../js/auth.js"></script>
-    <script src="../js/teacher.js"></script>
+    <script>
+      // Only logged-in teachers can use this page
+      protectTeacherPage();
+    </script>
+    <script src="../js/teacher-flow.js"></script>
+    <script src="../js/teacher-report.js"></script>
+    <script src="../js/nav.js"></script>
   </body>
 </html>

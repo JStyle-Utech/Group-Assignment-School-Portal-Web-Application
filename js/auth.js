@@ -110,6 +110,11 @@ function protectTeacherPage() {
   protectPage("teacher");
 }
 
+// Call this at the bottom of every viewer (read-only) page
+function protectViewerPage() {
+  protectPage("viewer");
+}
+
 /* ---------- Checking the create account form ---------- */
 
 // Each check function looks at ONE field.
@@ -416,7 +421,7 @@ function setUpLoginPage() {
       adminSection.hidden=true;
       loginSection.hidden=false;
       document.getElementById("username").value= user.username;
-      document.getElementById("Password").focus();
+      document.getElementById("password").focus();
     }, 1500);
   });
 }

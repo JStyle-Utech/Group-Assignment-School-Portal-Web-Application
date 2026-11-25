@@ -7,13 +7,33 @@
     4. Abigail Reid | 2502162
     5. Ameallia Williams | 2502163
   Purpose: Fills the teacher dashboard with data from localStorage
-  Note: storage.js and auth.js must be loaded before this file
+  Note: storage.js, auth.js and teacher-flow.js must be loaded before this file
 */
 
 // Get the page elements we need
 const teacherSubject = document.getElementById("teacherSubject");
 const teacherAssessment = document.getElementById("teacherAssessment");
 const teacherBody = document.getElementById("teacherBody");
+
+// Teacher profile box
+function showTeacherProfile() {
+  const account = getLoggedInAccount();
+  if (!account) {
+    return;
+  }
+  document.getElementById("profName").textContent = account.fullName;
+  document.getElementById("profUsername").textContent = account.username;
+  document.getElementById("profRole").textContent = "Teacher";
+  document.getElementById("profEmail").textContent = account.email;
+
+  // Show the grade level and subject chosen on the Subjects page
+  const choice = getChoice();
+  if (choice) {
+    document.getElementById("profChoice").textContent = choice.level + " - " + choice.subject;
+  } else {
+    document.getElementById("profChoice").textContent = "None chosen yet";
+  }
+}
 
 // Summary cards at the top
 function showTeacherSummary() {
@@ -40,7 +60,7 @@ function showSubjectStudents() {
 
   if (teacherSubject.value === "") {
     teacherBody.innerHTML =
-      '<tr><td colspan="6"><div class="empty-note">Choose a subject to see your students.</div></td></tr>';
+      '<tr><td colspan="7"><div class="empty-note">Choose a subject to see your students.</div></td></tr>';
     return;
   }
 
@@ -54,7 +74,7 @@ function showSubjectStudents() {
 
   if (list.length === 0) {
     teacherBody.innerHTML =
-      '<tr><td colspan="6"><div class="empty-note">There are no active students yet.</div></td></tr>';
+      '<tr><td colspan="7"><div class="empty-note">There are no active students yet.</div></td></tr>';
     return;
   }
 
@@ -90,7 +110,8 @@ function showSubjectStudents() {
       "<td>" + escapeHtml(s.gradeLevel) + "</td>" +
       "<td>" + count + "</td>" +
       "<td>" + average + "</td>" +
-      "<td" + letterClass + ">" + letter + "</td></tr>";
+      "<td" + letterClass + ">" + letter + "</td>" +
+      '<td><a class="btn small" href="report-card.html?student=' + encodeURIComponent(s.studentId) + '">Report card</a></td></tr>';
   }
 }
 
@@ -99,6 +120,7 @@ function showSubjectStudents() {
 fillSelect(teacherSubject, SUBJECTS);
 fillSelect(teacherAssessment, ASSESSMENTS);
 
+showTeacherProfile();
 showTeacherSummary();
 showSubjectStudents();
 

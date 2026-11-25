@@ -2573,3 +2573,287 @@ nav a.active {
     scroll-behavior: auto !important;
   }
 }
+
+/* =====================================================================
+   TEACHER AND VIEWER PAGES (added)
+   Subjects, grade entry, report card, viewer search and viewer reports.
+   Like the layer above, these only apply inside <body class="admin-page">.
+   ===================================================================== */
+
+/* Two panels side by side (stack on small screens) */
+.admin-page .two-col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.5vw, 28px);
+}
+
+/* Name / value list used for profiles and the report card */
+.admin-page .profile-list {
+  display: grid;
+  grid-template-columns: minmax(110px, 160px) 1fr;
+  margin: 0;
+}
+
+.admin-page .profile-list dt,
+.admin-page .profile-list dd {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.admin-page .profile-list dt {
+  font-weight: bold;
+  color: var(--primary-colour);
+}
+
+.admin-page .profile-list dd {
+  margin: 0;
+}
+
+/* Wide profile (student record): two name/value pairs per row on large screens */
+@media screen and (min-width: 900px) {
+  .admin-page .profile-wide,
+  .admin-page .report-meta {
+    grid-template-columns: minmax(110px, 160px) 1fr minmax(110px, 160px) 1fr;
+    column-gap: var(--spacing-large);
+  }
+}
+
+.admin-page .plain-list {
+  margin: 0 0 var(--spacing-medium) 20px;
+}
+
+.admin-page .plain-list li {
+  margin-bottom: 8px;
+}
+
+/* Gold notice for read-only pages */
+.admin-page .readonly-note {
+  margin: 0 0 var(--spacing-medium);
+  padding: 10px 14px;
+  border-left: 4px solid var(--secondary-colour);
+  border-radius: 10px;
+  background: var(--gold-soft);
+  color: var(--maroon-dark);
+  font-size: 14.5px;
+  font-weight: bold;
+}
+
+/* Numbered step badge on the Subjects page */
+.admin-page .step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--primary-colour);
+  color: var(--secondary-colour);
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.admin-page .count-line,
+.admin-page .choice-line {
+  margin: var(--spacing-medium) 0;
+  font-weight: bold;
+  color: var(--muted-text);
+}
+
+.admin-page .choice-line a {
+  margin-left: 10px;
+}
+
+.admin-page .actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small);
+  margin-top: var(--spacing-medium);
+}
+
+.admin-page .detail-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-medium);
+}
+
+/* A link styled as a small button needs the same look as a <button> */
+.admin-page a.btn {
+  text-align: center;
+}
+
+.admin-page .letter-cell {
+  font-weight: bold;
+  text-align: center;
+  width: 80px;
+}
+
+.admin-page .report-subheading {
+  margin: var(--spacing-large) 0 var(--spacing-small);
+  color: var(--primary-colour);
+  font-size: 20px;
+}
+
+.admin-page .badge.status-none {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+/* Colours for the report bars */
+.admin-page .bar-fill.fill-a { background: #2e7d4f; }
+.admin-page .bar-fill.fill-b { background: #7bb661; }
+.admin-page .bar-fill.fill-c { background: #e0b100; }
+.admin-page .bar-fill.fill-d { background: #e8892b; }
+.admin-page .bar-fill.fill-e { background: #d0503c; }
+.admin-page .bar-fill.fill-f { background: #9e1b1b; }
+.admin-page .bar-fill.fill-paid { background: #2e7d4f; }
+.admin-page .bar-fill.fill-pending { background: #e0b100; }
+.admin-page .bar-fill.fill-outstanding { background: #b3261e; }
+.admin-page .bar-fill.fill-green { background: linear-gradient(90deg, #0e3024, var(--accent-colour) 70%, #2e7d4f); }
+
+/* ---------- Report card ---------- */
+.admin-page .report-sheet {
+  border-top-width: 6px;
+}
+
+.admin-page .report-head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+  margin-bottom: var(--spacing-medium);
+  padding-bottom: var(--spacing-medium);
+  border-bottom: 3px double var(--primary-colour);
+}
+
+.admin-page .report-head img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.admin-page .report-head h2 {
+  margin-bottom: 0;
+}
+
+.admin-page .report-head p {
+  margin: 0;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--muted-text);
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.admin-page .report-meta {
+  margin-bottom: var(--spacing-large);
+}
+
+.admin-page .report-table td,
+.admin-page .report-table th {
+  text-align: center;
+}
+
+.admin-page .report-table td:first-child,
+.admin-page .report-table th:first-child,
+.admin-page .report-table td:last-child,
+.admin-page .report-table th:last-child {
+  text-align: left;
+}
+
+.admin-page .report-summary {
+  margin-top: var(--spacing-large);
+}
+
+.admin-page .report-summary .stat-box strong {
+  font-size: clamp(18px, 2vw, 22px);
+}
+
+.admin-page .report-remark {
+  margin-top: var(--spacing-medium);
+  padding: 12px 16px;
+  border-left: 4px solid var(--accent-colour);
+  border-radius: 10px;
+  background: var(--green-soft);
+  font-weight: bold;
+}
+
+.admin-page .report-remark:empty {
+  display: none;
+}
+
+.admin-page .report-sign {
+  margin-top: var(--spacing-large);
+}
+
+/* Subject names in a letter-grade cell keep their colours inside stacked cards */
+.admin-page .badge[class*="grade-"] {
+  min-width: 30px;
+  text-align: center;
+}
+
+/* ---------- Small screens ---------- */
+@media screen and (max-width: 860px) {
+  .admin-page .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .admin-page .profile-list {
+    grid-template-columns: minmax(96px, 120px) 1fr;
+  }
+
+  .admin-page .report-head img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .admin-page .letter-cell {
+    width: auto;
+  }
+}
+
+/* ---------- Printing a report card or report ---------- */
+@media print {
+  .admin-page header,
+  .admin-page .admin-banner,
+  .admin-page .admin-footer,
+  .admin-page .skip-link,
+  .admin-page .no-print {
+    display: none !important;
+  }
+
+  .admin-page {
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .admin-page .admin-main {
+    padding: 0;
+  }
+
+  .admin-page .panel,
+  .admin-page .card,
+  .admin-page .stat-box {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .admin-page .table-wrap {
+    max-height: none;
+    overflow: visible;
+    border: none;
+  }
+
+  .admin-page .data-table {
+    min-width: 0;
+    font-size: 12px;
+  }
+
+  .admin-page .data-table th {
+    position: static;
+  }
+}

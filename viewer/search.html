@@ -1,0 +1,210 @@
+<!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
+  File: viewer/search.html
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
+  Universal Search Matrix (read only) - student profiles, grades directory and financial statements
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#800000" />
+    <title> Viewer Access Portal | Wolmer's Girls School Portal</title>
+    <link rel="stylesheet" href="../css/masterstylesheet.css" />
+  </head>
+
+  <body class="admin-page">
+    <a class="skip-link" href="#main">Skip to the main content</a>
+
+    <!--Navigation (this page is inside a folder, so links to other folders start with ../)-->
+    <header>
+      <div class="container">
+        <a href="../index.html" class="logo">
+          <img
+            src="../images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="adminNav"
+        >
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          Menu
+        </button>
+
+        <nav id="adminNav" aria-label="Viewer navigation">
+          <ul>
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="search.html" class="active" aria-current="page">SEARCH</a></li>
+            <li><a href="reports.html">REPORTS</a></li>
+            <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!--Page banner-->
+    <section class="admin-banner">
+      <div class="container">
+        <h1>Viewer Profile</h1>
+        <p>Look up student profiles, grades and fee statements (read only)</p>
+        <p class="admin-welcome" id="adminWelcome"></p>
+      </div>
+    </section>
+
+    <main class="admin-main" id="main">
+      <div class="container layout">
+        <div class="two-col">
+          <!-- Viewer profile -->
+          <section class="panel" aria-labelledby="profileHeading">
+            <h2 id="profileHeading">My viewer profile</h2>
+            <dl class="profile-list">
+              <dt>Name</dt>
+              <dd id="profName">-</dd>
+              <dt>Username</dt>
+              <dd id="profUsername">-</dd>
+              <dt>Role</dt>
+              <dd id="profRole">General authorized user (read only)</dd>
+              <dt>Access</dt>
+              <dd>Search and view records. Nothing can be added, changed or deleted.</dd>
+            </dl>
+          </section>
+
+          <section class="panel" aria-labelledby="accessHeading">
+            <h2 id="accessHeading">What you can see</h2>
+            <ul class="plain-list">
+              <li><strong>Personal profiles</strong> of registered students</li>
+              <li><strong>Grades directory</strong> with every saved score</li>
+              <li><strong>Financial statements</strong> with charges and payments</li>
+            </ul>
+            <p class="readonly-note">Read-only view: the records on these pages cannot be edited.</p>
+          </section>
+        </div>
+
+        <!-- Universal search -->
+        <section class="panel" aria-labelledby="searchHeading">
+          <h2 id="searchHeading">Search students</h2>
+          <p class="form-note">
+            Type a name, student ID, guardian, email, subject or fee description.
+            Use the lists to narrow the results.
+          </p>
+
+          <div class="toolbar">
+            <input type="search" id="searchBox" placeholder="Search by name, ID, guardian, subject..." aria-label="Search students" />
+            <select id="levelFilter" aria-label="Filter by grade level">
+              <option value="">All grade levels</option>
+            </select>
+            <select id="cohortFilter" aria-label="Filter by cohort">
+              <option value="">All cohorts</option>
+            </select>
+            <select id="feeFilter" aria-label="Filter by fee status">
+              <option value="">All fee statuses</option>
+              <option value="Paid">Paid</option>
+              <option value="Pending">Pending</option>
+              <option value="Outstanding">Outstanding</option>
+              <option value="No charges">No charges</option>
+            </select>
+            <span class="count" id="resultCount"></span>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table" id="resultTable">
+              <caption class="sr-only">Students that match the search</caption>
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Student</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Cohort</th>
+                  <th scope="col">Average</th>
+                  <th scope="col">Balance owing</th>
+                  <th scope="col">Fee status</th>
+                  <th scope="col">Record</th>
+                </tr>
+              </thead>
+              <tbody id="resultBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- One student's full record (read only) -->
+        <section class="panel" id="detailPanel" aria-labelledby="detailHeading" hidden>
+          <div class="detail-top">
+            <h2 id="detailHeading">Student record</h2>
+            <button type="button" class="btn small" id="closeDetail">Close</button>
+          </div>
+          <p class="readonly-note">Read-only view: this record cannot be edited.</p>
+
+          <h3 class="report-subheading">Personal profile</h3>
+          <dl class="profile-list profile-wide" id="detailProfile"></dl>
+
+          <h3 class="report-subheading">Grades directory</h3>
+          <p class="form-note" id="detailGradeSummary"></p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Saved scores for this student</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Assessment</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody id="detailGrades"></tbody>
+            </table>
+          </div>
+
+          <h3 class="report-subheading">Financial statement</h3>
+          <p class="form-note" id="detailFinanceSummary"></p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Charges and payments for this student</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Description</th>
+                  <th scope="col">Due date</th>
+                  <th scope="col">Amount due</th>
+                  <th scope="col">Paid</th>
+                  <th scope="col">Balance</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="detailFinance"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="admin-footer">
+      <div class="container">
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!--storage.js must load before auth.js, and both before the page script-->
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+      // Only logged-in viewers can use this page
+      protectViewerPage();
+    </script>
+    <script src="../js/viewer.js"></script>
+    <script src="../js/nav.js"></script>
+  </body>
+</html>

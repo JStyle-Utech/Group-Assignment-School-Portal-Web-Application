@@ -1,0 +1,181 @@
+<!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
+  File: viewer/reports.html
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
+  Reporting Platform (read only) - filterable visual reports on grades and fees
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#800000" />
+    <title>Reports | Wolmer's Girls School Portal</title>
+    <link rel="stylesheet" href="../css/masterstylesheet.css" />
+  </head>
+
+  <body class="admin-page">
+    <a class="skip-link" href="#main">Skip to the main content</a>
+
+    <!--Navigation (this page is inside a folder, so links to other folders start with ../)-->
+    <header>
+      <div class="container">
+        <a href="../index.html" class="logo">
+          <img
+            src="../images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="adminNav"
+        >
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          Menu
+        </button>
+
+        <nav id="adminNav" aria-label="Viewer navigation">
+          <ul>
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="search.html">SEARCH</a></li>
+            <li><a href="reports.html" class="active" aria-current="page">REPORTS</a></li>
+            <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!--Page banner-->
+    <section class="admin-banner">
+      <div class="container">
+        <h1>Reports</h1>
+        <p>Filter and view reports on grades and school fees (read only)</p>
+        <p class="admin-welcome" id="adminWelcome"></p>
+      </div>
+    </section>
+
+    <main class="admin-main" id="main">
+      <div class="container layout">
+        <section class="panel no-print" aria-labelledby="filterHeading">
+          <h2 id="filterHeading">Report filters</h2>
+          <p class="form-note">
+            Choose filters and the reports update at once. Grade level and cohort change every report.
+            Subject and assessment change the score reports only.
+          </p>
+          <div class="inline-form">
+            <div class="field">
+              <label for="repLevel">Grade level</label>
+              <select id="repLevel"><option value="">All grade levels</option></select>
+            </div>
+            <div class="field">
+              <label for="repCohort">Cohort</label>
+              <select id="repCohort"><option value="">All cohorts</option></select>
+            </div>
+            <div class="field">
+              <label for="repSubject">Subject</label>
+              <select id="repSubject"><option value="">All subjects</option></select>
+            </div>
+            <div class="field">
+              <label for="repAssessment">Assessment</label>
+              <select id="repAssessment"><option value="">All assessments</option></select>
+            </div>
+            <div class="field">
+              <button type="button" class="btn" id="resetBtn">Reset</button>
+            </div>
+            <div class="field">
+              <button type="button" class="btn" id="printReport">Print</button>
+            </div>
+          </div>
+          <p class="readonly-note">Read-only view: these reports only show saved records and cannot change them.</p>
+        </section>
+
+        <section aria-label="Report summary">
+          <div class="stat-grid" id="repSummary">
+            <div class="stat-box"><strong id="sumStudents">0</strong><span>Students in report</span></div>
+            <div class="stat-box"><strong id="sumScores">0</strong><span>Scores recorded</span></div>
+            <div class="stat-box"><strong id="sumAverage">-</strong><span>Average score</span></div>
+            <div class="stat-box"><strong id="sumPass">-</strong><span>Pass rate (50% and up)</span></div>
+            <div class="stat-box"><strong id="sumCollected">-</strong><span>Fees collected</span></div>
+            <div class="stat-box"><strong id="sumOwing">-</strong><span>Balance owing</span></div>
+          </div>
+        </section>
+
+        <div class="two-col">
+          <section class="panel" aria-labelledby="subjectBarsHeading">
+            <h2 id="subjectBarsHeading">Average score by subject</h2>
+            <ul class="bar-list" id="subjectBars"></ul>
+          </section>
+
+          <section class="panel" aria-labelledby="distHeading">
+            <h2 id="distHeading">Grade distribution</h2>
+            <p class="form-note">How many scores fall in each letter grade.</p>
+            <ul class="bar-list" id="gradeBars"></ul>
+          </section>
+
+          <section class="panel" aria-labelledby="levelBarsHeading">
+            <h2 id="levelBarsHeading">Average score by grade level</h2>
+            <ul class="bar-list" id="levelBars"></ul>
+          </section>
+
+          <section class="panel" aria-labelledby="feeHeading">
+            <h2 id="feeHeading">Fee accounts by status</h2>
+            <p class="form-note">Number of ledger accounts that are Paid, Pending or Outstanding.</p>
+            <ul class="bar-list" id="feeBars"></ul>
+          </section>
+        </div>
+
+        <section class="panel" aria-labelledby="cohortHeading">
+          <h2 id="cohortHeading">Fees collected by cohort</h2>
+          <p class="form-note">The bar shows the part of the billed amount that has been paid.</p>
+          <ul class="bar-list" id="cohortBars"></ul>
+        </section>
+
+        <section class="panel" aria-labelledby="topHeading">
+          <h2 id="topHeading">Highest averages</h2>
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">The five students with the highest average scores</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">Student</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Average</th>
+                  <th scope="col">Letter</th>
+                </tr>
+              </thead>
+              <tbody id="topBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="admin-footer">
+      <div class="container">
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!--storage.js must load before auth.js, and both before the page script-->
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+      // Only logged-in viewers can use this page
+      protectViewerPage();
+    </script>
+    <script src="../js/viewer-reports.js"></script>
+    <script src="../js/nav.js"></script>
+  </body>
+</html>

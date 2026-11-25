@@ -1,61 +1,184 @@
 <!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
+  File: teacher/dashboard.html
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
+  Teacher Dashboard - summary, profile, tools and a subject view of students and their scores
+-->
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Teacher Dashboard | School Portal</title>
-    <link rel="stylesheet" href="../css/teacher.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#800000" />
+    <title>Teacher Dashboard | Wolmer's Girls School Portal</title>
+    <link rel="stylesheet" href="../css/masterstylesheet.css" />
   </head>
-  <body>
-    <header class="top">
-      <div class="wrap">
-        <strong>School Portal • Teacher Area</strong
-        ><span id="teacherName">Teacher</span>
+
+  <body class="admin-page">
+    <a class="skip-link" href="#main">Skip to the main content</a>
+
+    <!--Navigation (this page is inside a folder, so links to other folders start with ../)-->
+    <header>
+      <div class="container">
+        <a href="../index.html" class="logo">
+          <img
+            src="../images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="adminNav"
+        >
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          Menu
+        </button>
+
+        <nav id="adminNav" aria-label="Teacher navigation">
+          <ul>
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="dashboard.html" class="active" aria-current="page">TEACHER DASHBOARD</a></li>
+            <li><a href="subjects.html">SUBJECTS</a></li>
+            <li><a href="grade-entry.html">GRADE ENTRY</a></li>
+            <li><a href="report-card.html">REPORT CARDS</a></li>
+            <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
-    <nav class="nav wrap" aria-label="Teacher navigation">
-      <a href="dashboard.html">Dashboard</a><a href="subjects.html">Subjects</a
-      ><a href="grade-entry.html">Grade Entry</a
-      ><a href="report-card.html">Report Cards</a
-      ><button type="button" id="logoutButton">Log out</button>
-    </nav>
-    <main class="wrap">
-      <h1>Teacher Dashboard</h1>
-      <p class="intro">
-        Choose a task below to manage subjects, enter grades or view report
-        cards.
-      </p>
-      <div id="notice" role="status" class="notice" hidden></div>
-      <section class="stats" aria-label="Summary">
-        <div class="panel">
-          <span>Registered students</span><strong id="studentTotal">0</strong>
+
+    <!--Page banner-->
+    <section class="admin-banner">
+      <div class="container">
+        <h1>Teacher Dashboard</h1>
+        <p>Choose a subject to see your students and their scores</p>
+        <p class="admin-welcome" id="adminWelcome"></p>
+      </div>
+    </section>
+
+    <main class="admin-main" id="main">
+      <div class="container layout">
+        <!-- Summary cards -->
+        <section class="dashboard-cards" aria-label="Summary">
+          <article class="card">
+            <h2>Active students</h2>
+            <div class="stat-row">
+              <div class="stat"><strong id="statStudents">0</strong><span>Students</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2>Grades saved</h2>
+            <div class="stat-row">
+              <div class="stat"><strong id="statGrades">0</strong><span>Scores</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2>Subjects</h2>
+            <div class="stat-row">
+              <div class="stat"><strong id="statSubjects">0</strong><span>Offered</span></div>
+            </div>
+          </article>
+        </section>
+
+        <div class="two-col">
+          <!-- Teacher profile -->
+          <section class="panel" aria-labelledby="profileHeading">
+            <h2 id="profileHeading">My profile</h2>
+            <dl class="profile-list">
+              <dt>Name</dt>
+              <dd id="profName">-</dd>
+              <dt>Username</dt>
+              <dd id="profUsername">-</dd>
+              <dt>Role</dt>
+              <dd id="profRole">Teacher</dd>
+              <dt>Email</dt>
+              <dd id="profEmail">-</dd>
+              <dt>Current class</dt>
+              <dd id="profChoice">None chosen yet</dd>
+            </dl>
+          </section>
+
+          <!-- Teacher tools -->
+          <section class="panel" aria-labelledby="toolsHeading">
+            <h2 id="toolsHeading">Teacher tools</h2>
+            <p class="form-note">
+              Follow the steps: choose your class, enter the scores, then make a report card.
+            </p>
+            <div class="quick-actions">
+              <a class="button" href="subjects.html">1. Choose subject</a>
+              <a class="button" href="grade-entry.html">2. Batch Grade Upload</a>
+              <a class="button button-secondary" href="report-card.html" id="reportCardButton">3. Generate report card</a>
+            </div>
+          </section>
         </div>
-        <div class="panel">
-          <span>Subjects available</span><strong id="subjectTotal">0</strong>
-        </div>
-        <div class="panel">
-          <span>Saved grades</span><strong id="gradeTotal">0</strong>
-        </div>
-      </section>
-      <section class="cards">
-        <a class="panel link-card" href="subjects.html"
-          ><h2>1. Explore subjects</h2>
-          <p>Select a grade level and subject to see learners.</p></a
-        ><a class="panel link-card" href="grade-entry.html"
-          ><h2>2. Enter grades</h2>
-          <p>Save a mark out of 100 for each student.</p></a
-        ><a class="panel link-card" href="report-card.html"
-          ><h2>3. View report cards</h2>
-          <p>View subject marks and the calculated average.</p></a
-        >
-      </section>
+
+        <!-- Subject view -->
+        <section class="panel" aria-labelledby="subjectHeading">
+          <h2 id="subjectHeading">My subject</h2>
+          <div class="inline-form">
+            <div class="field">
+              <label for="teacherSubject">Subject</label>
+              <select id="teacherSubject">
+                <option value="">Select...</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="teacherAssessment">Assessment</label>
+              <select id="teacherAssessment">
+                <option value="">All assessments (average)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Students and their scores for the chosen subject</caption>
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Scores saved</th>
+                  <th scope="col">Average</th>
+                  <th scope="col">Letter</th>
+                  <th scope="col">Report</th>
+                </tr>
+              </thead>
+              <tbody id="teacherBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
     </main>
-    <footer class="wrap footer">
-      CIT2011 group project • Teacher Module • Demonstration with mock browser
-      data
+
+    <footer class="admin-footer">
+      <div class="container">
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
+      </div>
     </footer>
+
+    <!--storage.js must load before auth.js, and both before the page script-->
     <script src="../js/storage.js"></script>
     <script src="../js/auth.js"></script>
+    <script>
+      // Only logged-in teachers can use this page
+      protectTeacherPage();
+    </script>
+    <script src="../js/teacher-flow.js"></script>
     <script src="../js/teacher.js"></script>
+    <script src="../js/nav.js"></script>
   </body>
 </html>
