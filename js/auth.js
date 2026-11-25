@@ -12,29 +12,19 @@
 
 // Page each role is sent to after logging in
 const ROLE_PAGES = {
-  admin: "dashboard.html",
+  admin: "admin/dashboard.html",
   teacher: "teacher/dashboard.html",
   viewer: "viewer/search.html",
 };
 
 /* ---------- Accounts ---------- */
 
-// Accounts made with the "Create Admin Account" form live ONLY in this list.
-// It is not saved to localStorage, so it is empty again when the page is refreshed.
-const newAccounts = [];
-
 // The starter accounts (admin, teacher, viewer) plus any new accounts from this page view
 function getAllUsers() {
-  const saved = getData(STORAGE_KEYS.users);
-  const starters = saved.length > 0 ? saved : DEFAULT_USERS;
-  return starters.concat(newAccounts);
+  const saved= getData(STORAGE_KEYS.users);
+  return saved.length > 0 ? saved : DEFAULT_USERS;
 }
 
-// Removes old saved accounts, so only the starter accounts stay in localStorage
-// (this cleans up accounts saved by earlier versions of this page)
-function clearSavedAccounts() {
-  saveData(STORAGE_KEYS.users, DEFAULT_USERS); // saveData does not crash if storage is blocked
-}
 
 /* ---------- Login, logout and session ---------- */
 
@@ -235,8 +225,6 @@ function setUpLoginPage() {
   const showLogin = document.getElementById("showLogin");
   const roleSelect = document.getElementById("adminRole");
 
-  // Only the starter accounts are kept. Old saved accounts are removed.
-  clearSavedAccounts();
 
   // Empty both forms (browsers can refill them after a refresh)
   function clearForms() {
@@ -252,16 +240,16 @@ function setUpLoginPage() {
   }
 
   // The fields of the create account form. "key" matches the names in validateNewAccount.
-  const ADMIN_FIELDS = adminForm
-    ? [
+  const ADMIN_FIELDS = 
+  [
         { key: "fullName", input: document.getElementById("adminFullName"), help: document.getElementById("adminFullNameHelp") },
         { key: "username", input: document.getElementById("adminUsername"), help: document.getElementById("adminUsernameHelp") },
         { key: "email", input: document.getElementById("adminEmail"), help: document.getElementById("adminEmailHelp") },
         { key: "role", input: roleSelect, help: document.getElementById("adminRoleHelp") },
         { key: "password", input: document.getElementById("adminPassword"), help: document.getElementById("adminPasswordHelp") },
         { key: "confirm", input: document.getElementById("adminConfirm"), help: document.getElementById("adminConfirmHelp") },
-      ]
-    : [];
+      
+  ];
 
   // Shows a message under a field and colours the box red or green
   // message "" with showGood false puts the normal hint back and removes the colours
@@ -323,7 +311,7 @@ function setUpLoginPage() {
     const role = login(username, password);
 
     if (role && ROLE_PAGES[role]) {
-      window.location.href = "admin/dashboard.html";
+      window.location.href = ROLE_PAGES[role];
     } else {
       message.className = "form-message error";
       message.textContent = "Incorrect username or password.";
@@ -374,7 +362,8 @@ function setUpLoginPage() {
   }
 
   // Create a new account
-  adminForm.addEventListener("submit", function (event) {
+  adminForm.addEventListener("submit", function (event) 
+  {
     event.preventDefault();
     const message = document.getElementById("adminMessage");
     const details = readDetails();
@@ -405,6 +394,8 @@ function setUpLoginPage() {
     }
 
     // Keep the new account in memory only (NOT in localStorage)
+    
+    const users = getAllUsers();
     const user = {
       fullName: details.fullName,
       username: details.username,
@@ -412,17 +403,26 @@ function setUpLoginPage() {
       password: details.password,
       role: details.role,
     };
-    newAccounts.push(user);
+    users.push(user);
+    saveData(STORAGE_KEYS.users, users);
 
     // Log the new user in and open the dashboard for their role
     message.className = "form-message success";
-    message.textContent = "Account created. Opening your dashboard...";
-    startSession(user);
-    window.location.href ="admin/dashboard.html";
+    message.textContent = "Account created! Please log in with your new credentials.";
+    
+    setTimeout(function () {
+      adminForm.reset();
+      message.textContent="";
+      adminSection.hidden=true;
+      loginSection.hidden=false;
+      document.getElementById("username").value= user.username;
+      document.getElementById("Password").focus();
+    }, 1500);
   });
 }
 
 // Only run the login page code when the login form is on the page
-if (document.getElementById("login-form")) {
+if (document.getElementById("login-form")) 
+  {
   setUpLoginPage();
 }

@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
   CIT2011 Web Programming - School Portal Group Project
-  File: teacher/dashboard.html
+  File: dashboard.html
   Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
     1. Shantelle Young | 2502159
     2. Domonique Butler | 2502160
@@ -9,18 +9,21 @@
     4. Abigail Reid | 2502162
     5. Ameallia Williams | 2502163
 
-  Teacher Dashboard - summary and a subject view of students and their scores
+  Administrator Dashboard (summary of Student Registry, Academic Matrix and Financial Ledger)
 -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teacher Dashboard | Wolmer's Girls School Portal</title>
+    <meta name="theme-color" content="#800000" />
+    <title>Administrator Dashboard | Wolmer's Girls School Portal</title>
     <link rel="stylesheet" href="../css/masterstylesheet.css" />
   </head>
 
-  <body>
-    <!--Navigation (this page is inside the teacher folder, so links start with ../)-->
+  <body class="admin-page">
+    <a class="skip-link" href="#main">Skip to the main content</a>
+
+    <!--Navigation-->
     <header>
       <div class="container">
         <a href="../index.html" class="logo">
@@ -31,10 +34,23 @@
           <span>Wolmer's Girls School</span>
         </a>
 
-        <nav aria-label="Teacher navigation">
+        <button
+          type="button"
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="adminNav"
+        >
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          Menu
+        </button>
+
+        <nav id="adminNav" aria-label="Administrator navigation">
           <ul>
-            <li><a href="../index.html">HOME</a></li>
-            <li><a href="dashboard.html" class="active" aria-current="page">TEACHER DASHBOARD</a></li>
+            <li><a href="dashboard.html" class="active" aria-current="page">DASHBOARD</a></li>
+            <li><a href="students.html">STUDENT REGISTRY</a></li>
+            <li><a href="grades.html">ACADEMIC MATRIX</a></li>
+            <li><a href="finance.html">FINANCIAL LEDGER</a></li>
             <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
           </ul>
         </nav>
@@ -44,72 +60,139 @@
     <!--Page banner-->
     <section class="admin-banner">
       <div class="container">
-        <h1>Teacher Dashboard</h1>
-        <p>Choose a subject to see your students and their scores</p>
+        <h1>Administrator Dashboard</h1>
+        <p>Summary of students, grades and school fees</p>
         <p class="admin-welcome" id="adminWelcome"></p>
       </div>
     </section>
 
-    <main class="admin-main">
+    <main class="admin-main" id="main">
       <div class="container layout">
-        <!-- Summary cards -->
-        <section class="dashboard-cards" aria-label="Summary">
+        <!-- Quick actions -->
+        <section class="panel" aria-labelledby="quickHeading">
+          <h2 id="quickHeading">Quick actions</h2>
+          <div class="quick-actions">
+            <a class="button" href="students.html#formHeading">Register a student</a>
+            <a class="button" href="grades.html">Enter grades</a>
+            <a class="button" href="finance.html">Add a charge or payment</a>
+          </div>
+        </section>
+
+        <!-- Summary cards for the three modules -->
+        <section class="dashboard-cards" aria-label="Summary of the three modules">
           <article class="card">
-            <h2>Active students</h2>
+            <h2>Student Registry</h2>
             <div class="stat-row">
               <div class="stat"><strong id="statStudents">0</strong><span>Students</span></div>
+              <div class="stat"><strong id="statActive">0</strong><span>Active</span></div>
+              <div class="stat"><strong id="statInactive">0</strong><span>Inactive</span></div>
+            </div>
+            <div class="card-actions">
+              <a class="button" href="students.html">Open registry</a>
+              <a class="button button-secondary" href="students.html#formHeading">Add student</a>
             </div>
           </article>
 
           <article class="card">
-            <h2>Grades saved</h2>
+            <h2>Academic Matrix</h2>
             <div class="stat-row">
-              <div class="stat"><strong id="statGrades">0</strong><span>Scores</span></div>
+              <div class="stat"><strong id="statGrades">0</strong><span>Grades saved</span></div>
+              <div class="stat"><strong id="statSubjects">0</strong><span>Subjects</span></div>
+              <div class="stat"><strong id="statAverage">-</strong><span>School average</span></div>
+            </div>
+            <div class="card-actions">
+              <a class="button" href="grades.html">Open matrix</a>
             </div>
           </article>
 
           <article class="card">
-            <h2>Subjects</h2>
+            <h2>Financial Ledger</h2>
             <div class="stat-row">
-              <div class="stat"><strong id="statSubjects">0</strong><span>Offered</span></div>
+              <div class="stat"><strong id="statBilled">J$0.00</strong><span>Billed</span></div>
+              <div class="stat"><strong id="statCollected">J$0.00</strong><span>Collected</span></div>
+              <div class="stat"><strong id="statBalance">J$0.00</strong><span>Balance owing</span></div>
+            </div>
+            <div class="card-actions">
+              <a class="button" href="finance.html">Open ledger</a>
             </div>
           </article>
         </section>
 
-        <!-- Subject view -->
-        <section class="panel" aria-labelledby="subjectHeading">
-          <h2 id="subjectHeading">My subject</h2>
-          <div class="inline-form">
-            <div class="field">
-              <label for="teacherSubject">Subject</label>
-              <select id="teacherSubject">
-                <option value="">Select...</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="teacherAssessment">Assessment</label>
-              <select id="teacherAssessment">
-                <option value="">All assessments (average)</option>
-              </select>
-            </div>
+        <!-- Student Registry preview -->
+        <section class="panel" aria-labelledby="studentsHeading">
+          <h2 id="studentsHeading">Student Registry</h2>
+          <p class="form-note">Number of students in each enrollment cohort</p>
+          <ul id="cohortBars" class="bar-list"></ul>
+
+          <div class="toolbar">
+            <label for="dashSearch" class="sr-only">Search students</label>
+            <input type="search" id="dashSearch" placeholder="Search by name or ID" />
+            <label for="dashCohort" class="sr-only">Filter by cohort</label>
+            <select id="dashCohort">
+              <option value="">All cohorts</option>
+            </select>
+            <span id="dashCount" class="count" aria-live="polite"></span>
           </div>
 
           <div class="table-wrap">
             <table class="data-table">
-              <caption class="sr-only">Students and their scores for the chosen subject</caption>
+              <caption class="sr-only">Students</caption>
               <thead>
                 <tr>
                   <th scope="col">ID</th>
                   <th scope="col">Name</th>
                   <th scope="col">Grade</th>
-                  <th scope="col">Scores saved</th>
-                  <th scope="col">Average</th>
-                  <th scope="col">Letter</th>
+                  <th scope="col">Cohort</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Update</th>
                 </tr>
               </thead>
-              <tbody id="teacherBody"></tbody>
+              <tbody id="dashStudentBody"></tbody>
             </table>
           </div>
+          <a class="panel-link" href="students.html">See all students and the registration form</a>
+        </section>
+
+        <!-- Academic Matrix preview -->
+        <section class="panel" aria-labelledby="gradesHeading">
+          <h2 id="gradesHeading">Academic Matrix</h2>
+          <div class="toolbar">
+            <label for="dashAssessment" class="sr-only">Filter by assessment</label>
+            <select id="dashAssessment">
+              <option value="">All assessments</option>
+            </select>
+            <span class="form-note">Average score for each subject</span>
+          </div>
+          <ul id="subjectBars" class="bar-list"></ul>
+          <a class="panel-link" href="grades.html">Enter or manage grades</a>
+        </section>
+
+        <!-- Financial Ledger preview -->
+        <section class="panel" aria-labelledby="ledgerHeading">
+          <h2 id="ledgerHeading">Financial Ledger</h2>
+          <div class="pill-row" id="statusPills" role="group" aria-label="Filter by account status">
+            <button type="button" class="pill active" data-status="">All</button>
+            <button type="button" class="pill" data-status="Paid">Paid</button>
+            <button type="button" class="pill" data-status="Pending">Pending</button>
+            <button type="button" class="pill" data-status="Outstanding">Outstanding</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Latest ledger records</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Student</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Due date</th>
+                  <th scope="col">Balance</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="dashLedgerBody"></tbody>
+            </table>
+          </div>
+          <a class="panel-link" href="finance.html">Open the full ledger</a>
         </section>
       </div>
     </main>
@@ -121,12 +204,13 @@
     </footer>
 
     <!--storage.js must load before auth.js, and both before the page script-->
-    <script src="../js/storage.js"></script>
-    <script src="../js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
     <script>
-      // Only logged-in teachers can use this page
-      protectTeacherPage();
+      // Only logged-in administrators can use this page
+      protectAdminPage();
     </script>
-    <script src="../js/teacher.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/nav.js"></script>
   </body>
 </html>

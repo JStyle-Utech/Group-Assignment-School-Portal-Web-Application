@@ -42,11 +42,6 @@ function saveData(key, data)
   }
 }
 
-/*// Reads a drawer and returns its list, or an empty list if nothing is saved
-function getData(key) 
-{
-  return JSON.parse(localStorage.getItem(key)) || [];
-}*/
 
 // Starter login accounts, loaded on the first visit only
 const DEFAULT_USERS = [

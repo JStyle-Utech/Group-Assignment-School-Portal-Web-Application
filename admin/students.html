@@ -15,29 +15,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#800000" />
     <title>Student Registry | Wolmer's Girls School Portal</title>
-    <link rel="stylesheet" href="css/masterstylesheet.css" />
+    <link rel="stylesheet" href="../css/masterstylesheet.css" />
   </head>
 
-  <body>
+  <body class="admin-page">
+    <a class="skip-link" href="#main">Skip to the main content</a>
+
     <!--Navigation-->
     <header>
       <div class="container">
-        <a href="index.html" class="logo">
+        <a href="../index.html" class="logo">
           <img
-            src="images/wolmers-logo%203.png"
+            src="../images/wolmers-logo%203.png"
             alt="Wolmer's Girls School crest"
           />
           <span>Wolmer's Girls School</span>
         </a>
 
-        <nav aria-label="Administrator navigation">
+        <button
+          type="button"
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="adminNav"
+        >
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          Menu
+        </button>
+
+        <nav id="adminNav" aria-label="Administrator navigation">
           <ul>
             <li><a href="dashboard.html">DASHBOARD</a></li>
             <li><a href="students.html" class="active" aria-current="page">STUDENT REGISTRY</a></li>
             <li><a href="grades.html">ACADEMIC MATRIX</a></li>
             <li><a href="finance.html">FINANCIAL LEDGER</a></li>
-            <li><a href="login.html" id="logoutLink">LOG OUT</a></li>
+            <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
           </ul>
         </nav>
       </div>
@@ -52,7 +66,7 @@
       </div>
     </section>
 
-    <main class="admin-main">
+    <main class="admin-main" id="main">
       <div class="container layout">
           <!-- Cohort summary: counts per enrollment cohort -->
           <section aria-labelledby="summaryHeading" class="panel summary-panel">
@@ -61,7 +75,7 @@
               <ul id="cohortSummary" class="summary-list"></ul>
             </div>
             <img
-              src="images/wolmershistory.jpg"
+              src="../images/wolmershistory.jpg"
               alt="Historical photograph relating to Wolmer's"
             />
           </section>
@@ -265,5 +279,6 @@
       protectAdminPage();
     </script>
     <script src="js/admin-students.js"></script>
+    <script src="js/nav.js"></script>
   </body>
 </html>
