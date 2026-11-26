@@ -1,0 +1,150 @@
+<!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
+  File: teacher/subjects.html
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
+  Subjects - curriculum filter routing (choose a grade level and a subject before loading students)
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#800000" />
+    <title>Choose a Subject | Wolmer's Girls School Portal</title>
+    <link rel="stylesheet" href="../css/masterstylesheet.css" />
+  </head>
+
+  <body class="admin-page">
+    <a class="skip-link" href="#main">Skip to the main content</a>
+
+    <!--Navigation (this page is inside a folder, so links to other folders start with ../)-->
+    <header>
+      <div class="container">
+        <a href="../index.html" class="logo">
+          <img
+            src="../images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="adminNav"
+        >
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          Menu
+        </button>
+
+        <nav id="adminNav" aria-label="Teacher navigation">
+          <ul>
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="dashboard.html">TEACHER DASHBOARD</a></li>
+            <li><a href="subjects.html" class="active" aria-current="page">SUBJECTS</a></li>
+            <li><a href="grade-entry.html">GRADE ENTRY</a></li>
+            <li><a href="report-card.html">REPORT CARDS</a></li>
+            <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!--Page banner-->
+    <section class="admin-banner">
+      <div class="container">
+        <h1>Choose a Subject</h1>
+        <p>Pick your grade level and subject before loading the student list</p>
+        <p class="admin-welcome" id="adminWelcome"></p>
+      </div>
+    </section>
+
+    <main class="admin-main" id="main">
+      <div class="container layout">
+        <section class="panel" aria-labelledby="chooseHeading">
+          <h2 id="chooseHeading"><span class="step-number">1</span> Choose your class</h2>
+          <p class="form-note">
+            First pick a grade level, then pick one of the subjects offered in that level.
+            The student list only loads after you choose a subject.
+          </p>
+
+          <div class="inline-form">
+            <div class="field">
+              <label for="levelSelect">Grade level</label>
+              <select id="levelSelect">
+                <option value="">Select...</option>
+              </select>
+              <span class="error" id="levelSelectError"></span>
+            </div>
+            <div class="field">
+              <label for="subjectSelect">Subject</label>
+              <select id="subjectSelect" disabled>
+                <option value="">Select...</option>
+              </select>
+              <span class="error" id="subjectSelectError"></span>
+            </div>
+            <div class="field">
+              <button type="button" class="btn primary" id="loadBtn">Load students</button>
+            </div>
+          </div>
+          <p class="form-note" id="subjectInfo">
+            Choose a grade level first. Then the subjects for that level will appear.
+          </p>
+        </section>
+
+        <section class="panel" id="studentPanel" aria-labelledby="studentHeading" hidden>
+          <h2 id="studentHeading"><span class="step-number">2</span> <span id="studentHeadingText">Students</span></h2>
+          <p class="form-note">
+            These are the active students registered in this grade level.
+            Subject-by-subject enrolment is not recorded by the administrator yet.
+          </p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Students in the chosen grade level</caption>
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Cohort</th>
+                  <th scope="col">Scores saved</th>
+                  <th scope="col">Average</th>
+                </tr>
+              </thead>
+              <tbody id="subjectStudents"></tbody>
+            </table>
+          </div>
+          <p class="count-line" id="subjectCount" role="status"></p>
+          <div class="quick-actions">
+            <a class="button" href="grade-entry.html">Go to Grade Entry</a>
+            <a class="button button-secondary" href="report-card.html">Generate report cards</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="admin-footer">
+      <div class="container">
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!--storage.js must load before auth.js, and both before the page script-->
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+      // Only logged-in teachers can use this page
+      protectTeacherPage();
+    </script>
+    <script src="../js/teacher-flow.js"></script>
+    <script src="../js/teacher-subjects.js"></script>
+    <script src="../js/nav.js"></script>
+  </body>
+</html>

@@ -1,223 +1,284 @@
 <!doctype html>
 <!--
   CIT2011 Web Programming - School Portal Group Project
-  File: admin-students.html (Student Registry - Administrator)
-  Role: Student 3 - Administrative Interface Developer
-  Group members (Name | ID# | Fridays/12:00 PM- 1:50 PM):
-    1. Shantelle Young | 2502159 |
-    2. Domonique Butler | 2502160 | 
-    3. Jaheem Style | 2502161 | 
-    4. Abigail Reid | 2502162 |
-    5. Ameallia Williams | 2502163 | 
+  File: admin/students.html
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
+  Student Registry - register, update, search and delete students
 -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Student Registry | School Portal Admin</title>
-    <link rel="stylesheet" href="../css/admin-students.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#800000" />
+    <title>Student Registry | Wolmer's Girls School Portal</title>
+    <link rel="stylesheet" href="../css/masterstylesheet.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <h1>Student Registry</h1>
-      <nav aria-label="Admin navigation">
-        <a href="../index.html">Home</a>
-        <a href="admin-dashboard.html">Dashboard</a>
-        <a href="#" id="logoutLink">Log out</a>
-      </nav>
+
+  <body class="admin-page">
+    <a class="skip-link" href="#main">Skip to the main content</a>
+
+    <!--Navigation-->
+    <header>
+      <div class="container">
+        <a href="../index.html" class="logo">
+          <img
+            src="../images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="adminNav"
+        >
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          Menu
+        </button>
+
+        <nav id="adminNav" aria-label="Administrator navigation">
+          <ul>
+            <li><a href="dashboard.html">DASHBOARD</a></li>
+            <li><a href="students.html" class="active" aria-current="page">STUDENT REGISTRY</a></li>
+            <li><a href="grades.html">ACADEMIC MATRIX</a></li>
+            <li><a href="finance.html">FINANCIAL LEDGER</a></li>
+            <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
-    <main class="layout">
-      <!-- Cohort summary: counts per enrollment cohort -->
-      <section aria-labelledby="summaryHeading" class="panel">
-        <h2 id="summaryHeading">Enrollment cohorts</h2>
-        <ul id="cohortSummary" class="summary-list"></ul>
-      </section>
+    <!--Page banner-->
+    <section class="admin-banner">
+      <div class="container">
+        <h1>Student Registry</h1>
+        <p>Register, update and track the students of Wolmer's Girls School</p>
+        <p class="admin-welcome" id="adminWelcome"></p>
+      </div>
+    </section>
 
-      <!-- Create / update form -->
-      <section aria-labelledby="formHeading" class="panel">
-        <h2 id="formHeading">Register a student</h2>
-        <form id="studentForm" novalidate>
-          <input type="hidden" id="editingId" value="" />
-
-          <div class="field">
-            <label for="firstName">First name</label>
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              required
-              pattern="[A-Za-z][A-Za-z '\-]{1,29}"
-              autocomplete="off"
+    <main class="admin-main" id="main">
+      <div class="container layout">
+          <!-- Cohort summary: counts per enrollment cohort -->
+          <section aria-labelledby="summaryHeading" class="panel summary-panel">
+            <div>
+              <h2 id="summaryHeading">Enrollment cohorts</h2>
+              <ul id="cohortSummary" class="summary-list"></ul>
+            </div>
+            <img
+              src="../images/wolmershistory.jpg"
+              alt="Historical photograph relating to Wolmer's"
             />
-            <small class="error" id="firstNameError" role="alert"></small>
-          </div>
+          </section>
 
-          <div class="field">
-            <label for="lastName">Last name</label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              required
-              pattern="[A-Za-z][A-Za-z '\-]{1,29}"
-              autocomplete="off"
-            />
-            <small class="error" id="lastNameError" role="alert"></small>
-          </div>
+          <!-- Create / update form -->
+          <section aria-labelledby="formHeading" class="panel">
+            <h2 id="formHeading">Register a student</h2>
+            <form id="studentForm" class="form-grid" novalidate>
+              <input type="hidden" id="editingId" value="" />
 
-          <div class="field">
-            <label for="dob">Date of birth</label>
-            <input type="date" id="dob" name="dob" required />
-            <small class="error" id="dobError" role="alert"></small>
-          </div>
+              <div class="field">
+                <label for="firstName">First name</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  required
+                  pattern="[A-Za-z][A-Za-z '\-]{1,29}"
+                  autocomplete="off"
+                />
+                <small class="error" id="firstNameError" role="alert"></small>
+              </div>
 
-          <div class="field">
-            <label for="gender">Gender</label>
-            <select id="gender" name="gender" required>
-              <option value="">Select...</option>
-              <option>Female</option>
-              <option>Male</option>
-            </select>
-            <small class="error" id="genderError" role="alert"></small>
-          </div>
+              <div class="field">
+                <label for="lastName">Last name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  required
+                  pattern="[A-Za-z][A-Za-z '\-]{1,29}"
+                  autocomplete="off"
+                />
+                <small class="error" id="lastNameError" role="alert"></small>
+              </div>
 
-          <div class="field">
-            <label for="gradeLevel">Grade / form</label>
-            <select id="gradeLevel" name="gradeLevel" required>
-              <option value="">Select...</option>
-            </select>
-            <small class="error" id="gradeLevelError" role="alert"></small>
-          </div>
+              <div class="field">
+                <label for="dob">Date of birth</label>
+                <input type="date" id="dob" name="dob" required />
+                <small class="error" id="dobError" role="alert"></small>
+              </div>
 
-          <div class="field">
-            <label for="cohort">Enrollment cohort (semester)</label>
-            <select id="cohort" name="cohort" required>
-              <option value="">Select...</option>
-            </select>
-            <small class="error" id="cohortError" role="alert"></small>
-          </div>
+              <div class="field">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                  <option value="">Select...</option>
+                  <option>Female</option>
+                  <option>Male</option>
+                </select>
+                <small class="error" id="genderError" role="alert"></small>
+              </div>
 
-          <div class="field">
-            <label for="guardianName">Parent / guardian name</label>
-            <input
-              type="text"
-              id="guardianName"
-              name="guardianName"
-              required
-              pattern="[A-Za-z][A-Za-z '\-.]{2,49}"
-            />
-            <small class="error" id="guardianNameError" role="alert"></small>
-          </div>
+              <div class="field">
+                <label for="gradeLevel">Grade / form</label>
+                <select id="gradeLevel" name="gradeLevel" required>
+                  <option value="">Select...</option>
+                </select>
+                <small class="error" id="gradeLevelError" role="alert"></small>
+              </div>
 
-          <div class="field">
-            <label for="guardianPhone">Guardian phone</label>
-            <input
-              type="tel"
-              id="guardianPhone"
-              name="guardianPhone"
-              required
-              pattern="876-[0-9]{3}-[0-9]{4}"
-              placeholder="876-555-1234"
-            />
-            <small class="error" id="guardianPhoneError" role="alert"></small>
-          </div>
+              <div class="field">
+                <label for="cohort">Enrollment cohort (semester)</label>
+                <select id="cohort" name="cohort" required>
+                  <option value="">Select...</option>
+                </select>
+                <small class="error" id="cohortError" role="alert"></small>
+              </div>
 
-          <div class="field">
-            <label for="email">Contact email</label>
-            <input type="email" id="email" name="email" required />
-            <small class="error" id="emailError" role="alert"></small>
-          </div>
+              <div class="field">
+                <label for="guardianName">Parent / guardian name</label>
+                <input
+                  type="text"
+                  id="guardianName"
+                  name="guardianName"
+                  required
+                  pattern="[A-Za-z][A-Za-z '\-.]{2,49}"
+                />
+                <small class="error" id="guardianNameError" role="alert"></small>
+              </div>
 
-          <div class="field wide">
-            <label for="address">Home address</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              required
-              minlength="5"
-              maxlength="100"
-            />
-            <small class="error" id="addressError" role="alert"></small>
-          </div>
+              <div class="field">
+                <label for="guardianPhone">Guardian phone</label>
+                <input
+                  type="tel"
+                  id="guardianPhone"
+                  name="guardianPhone"
+                  required
+                  pattern="876-[0-9]{3}-[0-9]{4}"
+                  placeholder="876-555-1234"
+                />
+                <small class="error" id="guardianPhoneError" role="alert"></small>
+              </div>
 
-          <div class="field">
-            <label for="status">Status</label>
-            <select id="status" name="status" required>
-              <option>Active</option>
-              <option>Inactive</option>
-            </select>
-          </div>
+              <div class="field">
+                <label for="email">Contact email</label>
+                <input type="email" id="email" name="email" required />
+                <small class="error" id="emailError" role="alert"></small>
+              </div>
 
-          <div class="actions wide">
-            <button type="submit" id="saveBtn" class="btn primary">
-              Register student
-            </button>
-            <button type="button" id="cancelBtn" class="btn" hidden>
-              Cancel edit
-            </button>
-            <button type="reset" id="resetBtn" class="btn">Clear form</button>
-          </div>
-          <p id="formMessage" class="message" role="status"></p>
-        </form>
-      </section>
+              <div class="field wide">
+                <label for="address">Home address</label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  required
+                  minlength="5"
+                  maxlength="100"
+                />
+                <small class="error" id="addressError" role="alert"></small>
+              </div>
 
-      <!-- Master data table -->
-      <section aria-labelledby="tableHeading" class="panel table-panel">
-        <h2 id="tableHeading">All students</h2>
-        <div class="toolbar">
-          <label for="searchBox" class="sr-only">Search students</label>
-          <input
-            type="search"
-            id="searchBox"
-            placeholder="Search by name, ID or email"
-          />
-          <label for="cohortFilter" class="sr-only">Filter by cohort</label>
-          <select id="cohortFilter">
-            <option value="">All cohorts</option>
-          </select>
-          <label for="statusFilter" class="sr-only">Filter by status</label>
-          <select id="statusFilter">
-            <option value="">All statuses</option>
-            <option>Active</option>
-            <option>Inactive</option>
-          </select>
-          <span id="resultCount" class="count" aria-live="polite"></span>
-        </div>
+              <div class="field">
+                <label for="status">Status</label>
+                <select id="status" name="status" required>
+                  <option>Active</option>
+                  <option>Inactive</option>
+                </select>
+              </div>
 
-        <div class="table-wrap">
-          <table id="studentTable">
-            <caption class="sr-only">
-              Registered students
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col">
-                  <button class="sort" data-key="studentId">ID</button>
-                </th>
-                <th scope="col">
-                  <button class="sort" data-key="lastName">Name</button>
-                </th>
-                <th scope="col">
-                  <button class="sort" data-key="gradeLevel">Grade</button>
-                </th>
-                <th scope="col">
-                  <button class="sort" data-key="cohort">Cohort</button>
-                </th>
-                <th scope="col">Guardian</th>
-                <th scope="col">
-                  <button class="sort" data-key="status">Status</button>
-                </th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="studentTableBody"></tbody>
-          </table>
-        </div>
-      </section>
+              <div class="actions wide">
+                <button type="submit" id="saveBtn" class="btn primary">
+                  Register student
+                </button>
+                <button type="button" id="cancelBtn" class="btn" hidden>
+                  Cancel edit
+                </button>
+                <button type="reset" id="resetBtn" class="btn">Clear form</button>
+              </div>
+              <p id="formMessage" class="message" role="status"></p>
+            </form>
+          </section>
+
+          <!-- Master data table -->
+          <section aria-labelledby="tableHeading" class="panel table-panel">
+            <h2 id="tableHeading">All students</h2>
+            <div class="toolbar">
+              <label for="searchBox" class="sr-only">Search students</label>
+              <input
+                type="search"
+                id="searchBox"
+                placeholder="Search by name, ID or email"
+              />
+              <label for="cohortFilter" class="sr-only">Filter by cohort</label>
+              <select id="cohortFilter">
+                <option value="">All cohorts</option>
+              </select>
+              <label for="statusFilter" class="sr-only">Filter by status</label>
+              <select id="statusFilter">
+                <option value="">All statuses</option>
+                <option>Active</option>
+                <option>Inactive</option>
+              </select>
+              <span id="resultCount" class="count" aria-live="polite"></span>
+            </div>
+
+            <div class="table-wrap">
+              <table id="studentTable" class="data-table">
+                <caption class="sr-only">
+                  Registered students
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <button class="sort" data-key="studentId">ID</button>
+                    </th>
+                    <th scope="col">
+                      <button class="sort" data-key="lastName">Name</button>
+                    </th>
+                    <th scope="col">
+                      <button class="sort" data-key="gradeLevel">Grade</button>
+                    </th>
+                    <th scope="col">
+                      <button class="sort" data-key="cohort">Cohort</button>
+                    </th>
+                    <th scope="col">Guardian</th>
+                    <th scope="col">
+                      <button class="sort" data-key="status">Status</button>
+                    </th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="studentTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+      </div>
     </main>
 
+    <footer class="admin-footer">
+      <div class="container">
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!--storage.js must load before auth.js, and both before the page script-->
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+      // Only logged-in administrators can use this page
+      protectAdminPage();
+    </script>
     <script src="../js/admin-students.js"></script>
+    <script src="../js/nav.js"></script>
   </body>
 </html>

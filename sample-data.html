@@ -1,0 +1,335 @@
+<!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
+  File: sample-data.html
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
+  Test data page - fills localStorage with sample students, grades, fees and accounts
+  so every dashboard (admin, teacher and viewer) has something to show.
+  Open this page once, press "Load sample data", then log in.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Load Sample Data | Wolmer's Girls School Portal</title>
+    <link rel="stylesheet" href="css/masterstylesheet.css" />
+  </head>
+
+  <body class="admin-page">
+    <header>
+      <div class="container">
+        <a href="index.html" class="logo">
+          <img src="images/wolmers-logo%203.png" alt="Wolmer's Girls School crest" />
+          <span>Wolmer's Girls School</span>
+        </a>
+      </div>
+    </header>
+
+    <section class="admin-banner">
+      <div class="container">
+        <h1>Sample Test Data</h1>
+        <p>Fill the portal with students, grades and fees to test every dashboard</p>
+      </div>
+    </section>
+
+    <main class="admin-main" id="main">
+      <div class="container layout">
+        <section class="panel" aria-labelledby="loadHeading">
+          <h2 id="loadHeading">What will be loaded</h2>
+          <ul class="plain-list">
+            <li><strong>28 students</strong> (4 in each of the 7 grade levels, 2 of them inactive)</li>
+            <li><strong>Grades</strong> for every student in the subjects offered in their grade level (Test 1, Test 2 and Mid-Year Exam, plus some Final Exam and Coursework scores)</li>
+            <li><strong>Fee records</strong> with Paid, Pending and Outstanding accounts, plus some part payments</li>
+            <li><strong>4 accounts</strong> (listed below)</li>
+          </ul>
+          <p class="readonly-note">
+            This replaces the students, grades, fees and accounts already saved in this browser.
+          </p>
+          <div class="actions-row">
+            <button type="button" class="btn primary" id="loadBtn">Load sample data</button>
+            <button type="button" class="btn danger" id="clearBtn">Clear all data</button>
+          </div>
+          <p class="message" id="resultMessage" role="status"></p>
+        </section>
+
+        <section class="panel" aria-labelledby="accountsHeading">
+          <h2 id="accountsHeading">Accounts to log in with</h2>
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Sample login accounts</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Role</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Password</th>
+                  <th scope="col">Opens</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Administrator</td><td>Ann Lee</td><td>admin</td><td>admin123</td><td>Admin dashboard</td></tr>
+                <tr><td>Teacher</td><td>Tina Brown</td><td>teacher</td><td>teach123</td><td>Teacher dashboard</td></tr>
+                <tr><td>Teacher</td><td>Marcus Reid</td><td>mreid</td><td>teach456</td><td>Teacher dashboard</td></tr>
+                <tr><td>Viewer</td><td>Victor Hall</td><td>viewer</td><td>view123</td><td>Universal Search</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="form-note">
+            Tip: log in with each account to see that dashboard. After loading, the numbers on the
+            admin dashboard, teacher dashboard and viewer reports will all be filled in.
+          </p>
+          <div class="actions-row">
+            <a class="button" href="login.html">Go to Login</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="admin-footer">
+      <div class="container">
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/storage.js"></script>
+    <script>
+      // Get the page elements we need
+      const loadBtn = document.getElementById("loadBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const resultMessage = document.getElementById("resultMessage");
+
+      // ---------- The people ----------
+      // Each line: first name, last name, grade level, cohort, status
+      const PEOPLE = [
+        ["Amara", "Brown", "Form 1", "2026 Semester 2", "Active"],
+        ["Kayla", "Campbell", "Form 1", "2026 Semester 2", "Active"],
+        ["Jada", "Dixon", "Form 1", "2026 Semester 2", "Active"],
+        ["Tia", "Edwards", "Form 1", "2026 Semester 1", "Active"],
+        ["Shanice", "Francis", "Form 2", "2026 Semester 2", "Active"],
+        ["Nia", "Grant", "Form 2", "2026 Semester 1", "Active"],
+        ["Raven", "Henry", "Form 2", "2026 Semester 2", "Active"],
+        ["Zoe", "Ingram", "Form 2", "2025 Semester 2", "Inactive"],
+        ["Imani", "James", "Form 3", "2026 Semester 2", "Active"],
+        ["Janelle", "Knight", "Form 3", "2026 Semester 1", "Active"],
+        ["Leah", "Lewis", "Form 3", "2026 Semester 2", "Active"],
+        ["Monique", "Morgan", "Form 3", "2025 Semester 2", "Active"],
+        ["Naomi", "Nelson", "Form 4", "2026 Semester 2", "Active"],
+        ["Olivia", "Osbourne", "Form 4", "2026 Semester 1", "Active"],
+        ["Paige", "Palmer", "Form 4", "2026 Semester 2", "Active"],
+        ["Rhea", "Quarrie", "Form 4", "2025 Semester 2", "Inactive"],
+        ["Samantha", "Reid", "Form 5", "2026 Semester 2", "Active"],
+        ["Tanya", "Samuels", "Form 5", "2026 Semester 1", "Active"],
+        ["Ursula", "Thomas", "Form 5", "2026 Semester 2", "Active"],
+        ["Vanessa", "Walker", "Form 5", "2027 Semester 1", "Active"],
+        ["Alicia", "Wright", "Lower Sixth", "2026 Semester 2", "Active"],
+        ["Briana", "Young", "Lower Sixth", "2026 Semester 1", "Active"],
+        ["Camille", "Anderson", "Lower Sixth", "2026 Semester 2", "Active"],
+        ["Danielle", "Bailey", "Lower Sixth", "2027 Semester 1", "Active"],
+        ["Erica", "Clarke", "Upper Sixth", "2026 Semester 2", "Active"],
+        ["Faith", "Davis", "Upper Sixth", "2026 Semester 1", "Active"],
+        ["Gabrielle", "Ellis", "Upper Sixth", "2026 Semester 2", "Active"],
+        ["Hanna", "Foster", "Upper Sixth", "2025 Semester 2", "Active"],
+      ];
+
+      // Birth year for each grade level (so the ages are between 10 and 25)
+      const BIRTH_YEAR = {
+        "Form 1": 2014, "Form 2": 2013, "Form 3": 2012, "Form 4": 2011,
+        "Form 5": 2010, "Lower Sixth": 2009, "Upper Sixth": 2008,
+      };
+
+      // Subjects that a grade level does NOT take
+      const SKIPPED = {
+        "Form 4": ["Physical Education"],
+        "Form 5": ["Physical Education"],
+        "Lower Sixth": ["Integrated Science", "Physical Education", "Visual Arts"],
+        "Upper Sixth": ["Integrated Science", "Physical Education", "Visual Arts"],
+      };
+
+      // Due date of the tuition for each cohort
+      const DUE_DATES = {
+        "2025 Semester 2": "2025-09-15",
+        "2026 Semester 1": "2026-01-15",
+        "2026 Semester 2": "2026-09-15",
+        "2027 Semester 1": "2027-01-15",
+      };
+
+      // A small random number maker. The same start number always gives the same
+      // numbers, so the sample data is the same every time it is loaded.
+      let seedNumber = 2026;
+      function nextRandom() {
+        seedNumber = (seedNumber * 1103515245 + 12345) % 2147483648;
+        return seedNumber / 2147483648;
+      }
+
+      // Pads a number with zeros, for example 7 becomes "07"
+      function twoDigits(number) {
+        return String(number).padStart(2, "0");
+      }
+
+      /* ---------- Build each list ---------- */
+
+      function makeStudents() {
+        const list = [];
+        for (let i = 0; i < PEOPLE.length; i++) {
+          const p = PEOPLE[i];
+          const month = 1 + ((i * 5) % 12);
+          const day = 3 + ((i * 7) % 24);
+          list.push({
+            studentId: "S2026-" + String(i + 1).padStart(3, "0"),
+            firstName: p[0],
+            lastName: p[1],
+            dob: BIRTH_YEAR[p[2]] + "-" + twoDigits(month) + "-" + twoDigits(day),
+            gender: "Female",
+            gradeLevel: p[2],
+            cohort: p[3],
+            guardianName: "Marcia " + p[1],
+            guardianPhone: "876-555-" + String(1000 + i * 37).slice(0, 4),
+            email: p[0].toLowerCase() + "." + p[1].toLowerCase() + "@mail.com",
+            address: (10 + i) + " Hope Road, Kingston",
+            status: p[4],
+          });
+        }
+        return list;
+      }
+
+      function makeGrades(students) {
+        const list = [];
+        let number = 1;
+
+        for (let i = 0; i < students.length; i++) {
+          const s = students[i];
+          const skipped = SKIPPED[s.gradeLevel] || [];
+          const ability = 52 + nextRandom() * 36; // each student has a general level
+
+          for (let j = 0; j < SUBJECTS.length; j++) {
+            if (skipped.includes(SUBJECTS[j])) {
+              continue;
+            }
+            const subjectBias = (nextRandom() - 0.5) * 18; // some subjects are stronger
+
+            for (let k = 0; k < ASSESSMENTS.length; k++) {
+              const name = ASSESSMENTS[k];
+
+              // Final Exam is not done yet. Coursework is only for Mathematics and English.
+              if (name === "Final Exam") {
+                continue;
+              }
+              if (name === "Coursework" && j > 1) {
+                continue;
+              }
+
+              let score = ability + subjectBias + (nextRandom() - 0.5) * 16;
+              score = Math.max(25, Math.min(98, Math.round(score)));
+              list.push({
+                gradeId: "G" + number,
+                studentId: s.studentId,
+                subject: SUBJECTS[j],
+                assessment: name,
+                score: score,
+                dateEntered: "2026-11-" + twoDigits(2 + k * 4),
+              });
+              number++;
+            }
+          }
+        }
+        return list;
+      }
+
+      function makeFinances(students) {
+        const list = [];
+        let number = 1;
+
+        for (let i = 0; i < students.length; i++) {
+          const s = students[i];
+          const amount = TUITION_BY_GRADE[s.gradeLevel];
+          const payments = [];
+
+          // Different students pay in different ways
+          const pattern = i % 5;
+          if (pattern === 0) {
+            payments.push({ date: "2026-08-20", amount: amount, method: "Card" });
+          } else if (pattern === 1) {
+            payments.push({ date: "2026-09-02", amount: amount / 2, method: "Cash" });
+          } else if (pattern === 2) {
+            payments.push({ date: "2026-08-25", amount: amount / 2, method: "Bank Transfer" });
+            payments.push({ date: "2026-10-12", amount: amount / 4, method: "Cash" });
+          }
+          // pattern 3 and 4 have paid nothing yet
+
+          list.push({
+            recordId: "L" + number,
+            studentId: s.studentId,
+            description: "Tuition - " + s.cohort,
+            amountDue: amount,
+            dueDate: DUE_DATES[s.cohort],
+            payments: payments,
+          });
+          number++;
+
+          // Every third active student also has a small sports levy, still pending
+          if (i % 3 === 0 && s.status === "Active") {
+            list.push({
+              recordId: "L" + number,
+              studentId: s.studentId,
+              description: "Sports levy - 2026",
+              amountDue: 5000,
+              dueDate: "2026-12-15",
+              payments: [],
+            });
+            number++;
+          }
+        }
+        return list;
+      }
+
+      const SAMPLE_USERS = [
+        { fullName: "Ann Lee", username: "admin", email: "ann.lee@wolmers.edu.jm", password: "admin123", role: "admin" },
+        { fullName: "Tina Brown", username: "teacher", email: "tina.brown@wolmers.edu.jm", password: "teach123", role: "teacher" },
+        { fullName: "Marcus Reid", username: "mreid", email: "marcus.reid@wolmers.edu.jm", password: "teach456", role: "teacher" },
+        { fullName: "Victor Hall", username: "viewer", email: "victor.hall@wolmers.edu.jm", password: "view123", role: "viewer" },
+      ];
+
+      /* ---------- Buttons ---------- */
+
+      loadBtn.addEventListener("click", function () {
+        seedNumber = 2026; // start again so the data is always the same
+
+        const students = makeStudents();
+        const grades = makeGrades(students);
+        const finances = makeFinances(students);
+
+        saveData(STORAGE_KEYS.students, students);
+        saveData(STORAGE_KEYS.grades, grades);
+        saveData(STORAGE_KEYS.finances, finances);
+        saveData(STORAGE_KEYS.users, SAMPLE_USERS);
+        sessionStorage.removeItem(STORAGE_KEYS.session);
+
+        resultMessage.className = "message";
+        resultMessage.textContent =
+          "Loaded " + students.length + " students, " + grades.length + " grades, " +
+          finances.length + " fee records and " + SAMPLE_USERS.length + " accounts. You can log in now.";
+      });
+
+      clearBtn.addEventListener("click", function () {
+        if (!confirm("Delete all students, grades, fees and accounts saved in this browser?")) {
+          return;
+        }
+        localStorage.removeItem(STORAGE_KEYS.students);
+        localStorage.removeItem(STORAGE_KEYS.grades);
+        localStorage.removeItem(STORAGE_KEYS.finances);
+        localStorage.removeItem(STORAGE_KEYS.users);
+        sessionStorage.removeItem(STORAGE_KEYS.session);
+        initStorage(); // puts the three starter accounts back
+
+        resultMessage.className = "message";
+        resultMessage.textContent = "All data cleared. The starter accounts (admin, teacher, viewer) are back.";
+      });
+    </script>
+  </body>
+</html>

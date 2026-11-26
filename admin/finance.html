@@ -1,0 +1,245 @@
+<!doctype html>
+<!--
+  CIT2011 Web Programming - School Portal Group Project
+  File: admin/finance.html
+  Group Members (Name | ID# | Fridays 12:00 PM - 1:50 PM):
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
+  Financial Ledger - tuition charges, payments and account status (Paid, Pending, Outstanding)
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#800000" />
+    <title>Financial Ledger | Wolmer's Girls School Portal</title>
+    <link rel="stylesheet" href="../css/masterstylesheet.css" />
+  </head>
+
+  <body class="admin-page">
+    <a class="skip-link" href="#main">Skip to the main content</a>
+
+    <!--Navigation-->
+    <header>
+      <div class="container">
+        <a href="../index.html" class="logo">
+          <img
+            src="../images/wolmers-logo%203.png"
+            alt="Wolmer's Girls School crest"
+          />
+          <span>Wolmer's Girls School</span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="adminNav"
+        >
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          Menu
+        </button>
+
+        <nav id="adminNav" aria-label="Administrator navigation">
+          <ul>
+            <li><a href="dashboard.html">DASHBOARD</a></li>
+            <li><a href="students.html">STUDENT REGISTRY</a></li>
+            <li><a href="grades.html">ACADEMIC MATRIX</a></li>
+            <li><a href="finance.html" class="active" aria-current="page">FINANCIAL LEDGER</a></li>
+            <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!--Page banner-->
+    <section class="admin-banner">
+      <div class="container">
+        <h1>Financial Ledger</h1>
+        <p>Track tuition, payments and account balances</p>
+        <p class="admin-welcome" id="adminWelcome"></p>
+      </div>
+    </section>
+
+    <main class="admin-main" id="main">
+      <div class="container layout">
+        <!-- Account summary -->
+        <section aria-label="Account summary">
+          <div class="stat-grid">
+            <div class="stat-box"><strong id="boxBilled">J$0.00</strong><span>Total billed</span></div>
+            <div class="stat-box"><strong id="boxCollected">J$0.00</strong><span>Total collected</span></div>
+            <div class="stat-box"><strong id="boxBalance">J$0.00</strong><span>Balance owing</span></div>
+            <div class="stat-box"><strong id="boxPaid">0</strong><span><span class="badge status-paid">Paid</span> accounts</span></div>
+            <div class="stat-box"><strong id="boxPending">0</strong><span><span class="badge status-pending">Pending</span> accounts</span></div>
+            <div class="stat-box"><strong id="boxOutstanding">0</strong><span><span class="badge status-outstanding">Outstanding</span> accounts</span></div>
+          </div>
+        </section>
+
+        <!-- Add a tuition charge -->
+        <section class="panel" aria-labelledby="chargeHeading">
+          <h2 id="chargeHeading">Add a tuition charge</h2>
+          <p class="form-note">
+            Pick an active student. The tuition amount is filled in from the
+            student's grade, and you can change it.
+          </p>
+          <form id="chargeForm" class="form-grid" novalidate>
+            <div class="field">
+              <label for="chargeStudent">Student</label>
+              <select id="chargeStudent" required>
+                <option value="">Select...</option>
+              </select>
+              <small class="error" id="chargeStudentError" role="alert"></small>
+            </div>
+
+            <div class="field">
+              <label for="chargeDescription">Description</label>
+              <input type="text" id="chargeDescription" placeholder="Tuition - 2026 Semester 2" maxlength="60" required />
+              <small class="error" id="chargeDescriptionError" role="alert"></small>
+            </div>
+
+            <div class="field">
+              <label for="chargeAmount">Amount due (J$)</label>
+              <input type="number" id="chargeAmount" min="0" step="0.01" required />
+              <small class="error" id="chargeAmountError" role="alert"></small>
+            </div>
+
+            <div class="field">
+              <label for="chargeDueDate">Due date</label>
+              <input type="date" id="chargeDueDate" required />
+              <small class="error" id="chargeDueDateError" role="alert"></small>
+            </div>
+
+            <div class="actions wide">
+              <button type="submit" class="btn primary">Add charge</button>
+              <button type="reset" class="btn">Clear form</button>
+            </div>
+            <p id="chargeMessage" class="message" role="status"></p>
+          </form>
+        </section>
+
+        <!-- Record a payment -->
+        <section class="panel" aria-labelledby="paymentHeading">
+          <h2 id="paymentHeading">Record a payment</h2>
+          <form id="paymentForm" class="form-grid" novalidate>
+            <div class="field wide">
+              <label for="paymentRecord">Account</label>
+              <select id="paymentRecord" required>
+                <option value="">Select...</option>
+              </select>
+              <small class="error" id="paymentRecordError" role="alert"></small>
+            </div>
+
+            <div class="field">
+              <label for="paymentAmount">Payment amount (J$)</label>
+              <input type="number" id="paymentAmount" min="0" step="0.01" required />
+              <small class="error" id="paymentAmountError" role="alert"></small>
+            </div>
+
+            <div class="field">
+              <label for="paymentDate">Payment date</label>
+              <input type="date" id="paymentDate" required />
+              <small class="error" id="paymentDateError" role="alert"></small>
+            </div>
+
+            <div class="field">
+              <label for="paymentMethod">Payment method</label>
+              <select id="paymentMethod" required>
+                <option>Cash</option>
+                <option>Card</option>
+                <option>Bank Transfer</option>
+                <option>Cheque</option>
+              </select>
+            </div>
+
+            <div class="actions wide">
+              <button type="submit" class="btn primary">Save payment</button>
+              <button type="reset" class="btn">Clear form</button>
+            </div>
+            <p id="paymentMessage" class="message" role="status"></p>
+          </form>
+        </section>
+
+        <!-- Ledger -->
+        <section class="panel" aria-labelledby="ledgerHeading">
+          <h2 id="ledgerHeading">Ledger</h2>
+          <p class="form-note">
+            Paid = nothing owing. Pending = money owing, due date not passed.
+            Outstanding = money owing, due date passed.
+          </p>
+          <div class="toolbar">
+            <label for="ledgerSearch" class="sr-only">Search the ledger</label>
+            <input type="search" id="ledgerSearch" placeholder="Search by student name, ID or description" />
+            <label for="ledgerStatus" class="sr-only">Filter by status</label>
+            <select id="ledgerStatus">
+              <option value="">All statuses</option>
+              <option>Paid</option>
+              <option>Pending</option>
+              <option>Outstanding</option>
+            </select>
+            <span id="ledgerCount" class="count" aria-live="polite"></span>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Tuition ledger</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Student</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Due date</th>
+                  <th scope="col">Amount due</th>
+                  <th scope="col">Paid</th>
+                  <th scope="col">Balance</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ledgerBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Latest payments -->
+        <section class="panel" aria-labelledby="transactionHeading">
+          <h2 id="transactionHeading">Latest payments</h2>
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Latest payments</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Student</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Method</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="transactionBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="admin-footer">
+      <div class="container">
+        <p>&copy; 2026 Wolmer's Girls School. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!--storage.js must load before auth.js, and both before the page script-->
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+      // Only logged-in administrators can use this page
+      protectAdminPage();
+    </script>
+    <script src="../js/finance.js"></script>
+    <script src="../js/nav.js"></script>
+  </body>
+</html>
