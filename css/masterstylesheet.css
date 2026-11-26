@@ -386,15 +386,17 @@ textarea {
     linear-gradient(rgba(40, 0, 0, 0.55), rgba(40, 0, 0, 0.55)),
     url("../images/wolmershero.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center 30%;
   background-repeat: no-repeat;
   background-color: var(--primary-colour);
   min-height: 350px;
   display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
   color: var(--card-colour);
-  padding: var(--spacing-large);
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 .hero-about h1 {
@@ -628,9 +630,20 @@ textarea {
 ========================= */
 
 .contact-banner {
-  background-color: var(--primary-colour);
-  padding: 70px 20px;
+  background-image:
+    linear-gradient(rgba(40, 0, 0, 0.55), rgba(40, 0, 0, 0.55)),
+    url("../images/wolmershero.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  min-height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  color: var(--card-colour);
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 /* Contact Us heading */
@@ -662,6 +675,7 @@ textarea {
 .contact-form-section {
   background-color: #f7f3ed;
   padding: var(--spacing-sections) 20px;
+  text-align: center;
 }
 
 #contact-form {
@@ -723,14 +737,20 @@ textarea {
 ========================= */
 
 .login-welcome {
-  background:
-    linear-gradient(rgba(40, 0, 0, 0.6), rgba(40, 0, 0, 0.6)),
+  background-image:
+    linear-gradient(rgba(40, 0, 0, 0.55), rgba(40, 0, 0, 0.55)),
     url("../images/wolmershero.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  min-height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 65px 20px;
-  color: white;
+  color: var(--card-colour);
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 .login-welcome h1 {
@@ -1497,12 +1517,27 @@ nav a.active {
   background-color: #fdf3f4;
 }
 
-.grade-a { background-color: #d4edda; color: #155724; }
-.grade-b { background-color: #e2f0d9; color: #2d5a1e; }
-.grade-c { background-color: #fff3cd; color: #856404; }
-.grade-d { background-color: #ffe5c2; color: #8a4b08; }
+.grade-a {
+  background-color: #d4edda;
+  color: #155724;
+}
+.grade-b {
+  background-color: #e2f0d9;
+  color: #2d5a1e;
+}
+.grade-c {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.grade-d {
+  background-color: #ffe5c2;
+  color: #8a4b08;
+}
 .grade-e,
-.grade-f { background-color: #f8d7da; color: #721c24; }
+.grade-f {
+  background-color: #f8d7da;
+  color: #721c24;
+}
 
 .matrix-wrap {
   overflow-x: auto;
@@ -1765,7 +1800,12 @@ nav a.active {
   padding: clamp(32px, 6vw, 64px) 0;
   text-align: left;
   background:
-    linear-gradient(105deg, rgba(60, 0, 0, 0.88) 0%, rgba(90, 0, 0, 0.7) 55%, rgba(90, 0, 0, 0.45) 100%),
+    linear-gradient(
+      105deg,
+      rgba(60, 0, 0, 0.88) 0%,
+      rgba(90, 0, 0, 0.7) 55%,
+      rgba(90, 0, 0, 0.45) 100%
+    ),
     url("../images/wolmershero.jpg");
   background-size: cover;
   background-position: center;
@@ -2236,7 +2276,12 @@ nav a.active {
 }
 
 .admin-page .bar-fill {
-  background: linear-gradient(90deg, var(--maroon-dark), var(--primary-colour) 70%, #b22222);
+  background: linear-gradient(
+    90deg,
+    var(--maroon-dark),
+    var(--primary-colour) 70%,
+    #b22222
+  );
 }
 
 .admin-page .bar-value {
@@ -2702,16 +2747,41 @@ nav a.active {
 }
 
 /* Colours for the report bars */
-.admin-page .bar-fill.fill-a { background: #2e7d4f; }
-.admin-page .bar-fill.fill-b { background: #7bb661; }
-.admin-page .bar-fill.fill-c { background: #e0b100; }
-.admin-page .bar-fill.fill-d { background: #e8892b; }
-.admin-page .bar-fill.fill-e { background: #d0503c; }
-.admin-page .bar-fill.fill-f { background: #9e1b1b; }
-.admin-page .bar-fill.fill-paid { background: #2e7d4f; }
-.admin-page .bar-fill.fill-pending { background: #e0b100; }
-.admin-page .bar-fill.fill-outstanding { background: #b3261e; }
-.admin-page .bar-fill.fill-green { background: linear-gradient(90deg, #0e3024, var(--accent-colour) 70%, #2e7d4f); }
+.admin-page .bar-fill.fill-a {
+  background: #2e7d4f;
+}
+.admin-page .bar-fill.fill-b {
+  background: #7bb661;
+}
+.admin-page .bar-fill.fill-c {
+  background: #e0b100;
+}
+.admin-page .bar-fill.fill-d {
+  background: #e8892b;
+}
+.admin-page .bar-fill.fill-e {
+  background: #d0503c;
+}
+.admin-page .bar-fill.fill-f {
+  background: #9e1b1b;
+}
+.admin-page .bar-fill.fill-paid {
+  background: #2e7d4f;
+}
+.admin-page .bar-fill.fill-pending {
+  background: #e0b100;
+}
+.admin-page .bar-fill.fill-outstanding {
+  background: #b3261e;
+}
+.admin-page .bar-fill.fill-green {
+  background: linear-gradient(
+    90deg,
+    #0e3024,
+    var(--accent-colour) 70%,
+    #2e7d4f
+  );
+}
 
 /* ---------- Report card ---------- */
 .admin-page .report-sheet {
