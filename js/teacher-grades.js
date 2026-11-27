@@ -8,7 +8,8 @@
     4. Abigail Reid | 2501978
     5. Ameallia Williams | 2502163
 
-  Batch Grade Entry logic for teacher/grade-entry.html
+  Batch Grade Entry logic for teacher/grade-entry.html (score table and CSV batch upload)
+  Note: storage.js, auth.js, teacher-flow.js and batch-upload.js must be loaded before this file
 */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -196,4 +197,35 @@ document.addEventListener("DOMContentLoaded", function () {
     formMessage.textContent =
       validEntries.length + " score(s) saved for " + choice.subject + " (" + selectedAssessment + ").";
   });
+
+  // ---------- Batch upload (CSV file) ----------
+  const templateBtn = document.getElementById("templateBtn");
+  const uploadBatchBtn = document.getElementById("uploadBatchBtn");
+  const batchFileInput = document.getElementById("batchFileInput");
+  const batchResult = document.getElementById("batchResult");
+
+  if (templateBtn && uploadBatchBtn && batchFileInput && batchResult) {
+    // Download a template with this class's student IDs filled in
+    templateBtn.addEventListener("click", function () {
+      downloadTemplate(students, "grade-template-" + choice.level.replace(/\s+/g, "-") + ".csv");
+    });
+
+    uploadBatchBtn.addEventListener("click", function () {
+      batchFileInput.click();
+    });
+
+    // When a file is chosen, check every row and save the good ones.
+    // A student must exist, be Active and be in the chosen grade level.
+    batchFileInput.addEventListener("change", function () {
+      const file = batchFileInput.files[0];
+      batchFileInput.value = ""; // so the same file can be chosen again
+      runBatchUpload(
+        file,
+        { subject: choice.subject, assessment: assessmentSelect.value, level: choice.level },
+        batchResult,
+        renderGradeRows,
+      );
+    });
+  }
 });
+

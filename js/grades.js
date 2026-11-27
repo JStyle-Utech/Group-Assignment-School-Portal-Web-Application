@@ -7,7 +7,7 @@
     4. Abigail Reid | 2502162
     5. Ameallia Williams | 2502163
   Purpose: Academic Matrix - enter, store and manage student grades
-  Note: storage.js and auth.js must be loaded before this file
+  Note: storage.js, auth.js and batch-upload.js must be loaded before this file
 */
 
 // Get the page elements we need
@@ -15,6 +15,10 @@ const entrySubject = document.getElementById("entrySubject");
 const entryAssessment = document.getElementById("entryAssessment");
 const entryCohort = document.getElementById("entryCohort");
 const entryGradeLevel = document.getElementById("entryGradeLevel");
+const uploadBatchBtn = document.getElementById("uploadBatchBtn");
+const batchFileInput = document.getElementById("batchFileInput");
+const templateBtn = document.getElementById("templateBtn");
+const batchResult = document.getElementById("batchResult");
 const entryBody = document.getElementById("entryBody");
 const entryMessage = document.getElementById("entryMessage");
 const matrixSearch = document.getElementById("matrixSearch");
@@ -63,7 +67,8 @@ function getAverage(grades, studentId, subject, assessment) {
 
 /* ---------- Section 1: enter grades ---------- */
 
-function showEntryGrid() {
+function showEntryGrid() 
+{
   const students = getData(STORAGE_KEYS.students);
   const grades = getData(STORAGE_KEYS.grades);
   entryBody.innerHTML = "";
@@ -115,6 +120,7 @@ function showEntryGrid() {
       '<td class="letter-cell">' + letter + "</td></tr>";
   }
 }
+
 
 // Shows the letter grade right away while the user types a score
 function updateLetter(input) {
@@ -265,6 +271,8 @@ function showMatrix() {
       }
     }
 
+  
+
     // Overall average of the subjects that have grades
     if (count === 0) {
       rowHtml += "<td>-</td></tr>";
@@ -374,4 +382,45 @@ document.getElementById("recordBody").addEventListener("click", function (event)
   showEntryGrid();
   showMatrix();
   showRecords();
+});
+
+/* ---------- Batch upload (CSV file) ---------- */
+
+// The active students in the entry grid (same filters as the grid), used for the template
+function getEntryStudents() {
+  return getData(STORAGE_KEYS.students).filter(function (s) {
+    const cohortOk = entryCohort.value === "" || s.cohort === entryCohort.value;
+    const gradeOk = entryGradeLevel.value === "" || s.gradeLevel === entryGradeLevel.value;
+    return s.status === "Active" && cohortOk && gradeOk;
+  });
+}
+
+// Download a template with the student IDs filled in
+templateBtn.addEventListener("click", function () {
+  downloadTemplate(getEntryStudents(), "grade-upload-template.csv");
+});
+
+// Upload CSV opens the file chooser
+uploadBatchBtn.addEventListener("click", function () {
+  if (entrySubject.value === "") {
+    showBatchError(batchResult, "Choose a subject and an assessment first, then upload the file.");
+    return;
+  }
+  batchFileInput.click();
+});
+
+// When a file is chosen, check every row and save the good ones
+batchFileInput.addEventListener("change", function () {
+  const file = batchFileInput.files[0];
+  batchFileInput.value = ""; // so the same file can be chosen again
+  runBatchUpload(
+    file,
+    { subject: entrySubject.value, assessment: entryAssessment.value, level: "" },
+    batchResult,
+    function () {
+      showEntryGrid();
+      showMatrix();
+      showRecords();
+    },
+  );
 });

@@ -12,6 +12,7 @@
 */
 
 // Get the page elements we need
+const repQuery = document.getElementById("repQuery");
 const repLevel = document.getElementById("repLevel");
 const repCohort = document.getElementById("repCohort");
 const repSubject = document.getElementById("repSubject");
@@ -76,7 +77,10 @@ function showReports() {
   const students = allStudents.filter(function (s) {
     const levelOk = repLevel.value === "" || s.gradeLevel === repLevel.value;
     const cohortOk = repCohort.value === "" || s.cohort === repCohort.value;
-    return levelOk && cohortOk;
+    const queryText = repQuery.value.trim().toLowerCase();
+    const queryOk = queryText === "" ||
+      (s.studentId + " " + s.firstName + " " + s.lastName).toLowerCase().includes(queryText);
+    return levelOk && cohortOk && queryOk;
   });
 
   // Look up a student's grade level by ID (used to group the scores)
@@ -231,6 +235,33 @@ function showReports() {
   }
   drawBars("cohortBars", cohortItems);
 
+  /* ----- Score records (read only list, the first 15) ----- */
+  const recordList = grades.slice().sort(function (a, b) {
+    const byName = getStudentName(a.studentId).localeCompare(getStudentName(b.studentId));
+    if (byName !== 0) {
+      return byName;
+    }
+    return a.subject.localeCompare(b.subject);
+  });
+  const recordsBody = document.getElementById("recordsBody");
+  recordsBody.innerHTML = "";
+  if (recordList.length === 0) {
+    recordsBody.innerHTML = '<tr><td colspan="6"><div class="empty-note">No scores match these filters.</div></td></tr>';
+  }
+  for (let i = 0; i < recordList.length && i < 15; i++) {
+    const g = recordList[i];
+    const letter = getLetterGrade(g.score);
+    recordsBody.innerHTML +=
+      "<tr><td>" + escapeHtml(getStudentName(g.studentId)) + "</td>" +
+      "<td>" + escapeHtml(levelOf[g.studentId]) + "</td>" +
+      "<td>" + escapeHtml(g.subject) + "</td>" +
+      "<td>" + escapeHtml(g.assessment) + "</td>" +
+      "<td>" + g.score + "</td>" +
+      '<td><span class="badge grade-' + letter.toLowerCase() + '">' + letter + "</span></td></tr>";
+  }
+  document.getElementById("recordsCount").textContent =
+    "Showing " + Math.min(15, recordList.length) + " of " + recordList.length + " score(s). Narrow the filters to see others.";
+
   /* ----- Highest averages ----- */
   const ranking = [];
   for (let i = 0; i < students.length; i++) {
@@ -268,12 +299,14 @@ fillSelect(repAssessment, ASSESSMENTS);
 
 showReports();
 
+repQuery.addEventListener("input", showReports);
 repLevel.addEventListener("change", showReports);
 repCohort.addEventListener("change", showReports);
 repSubject.addEventListener("change", showReports);
 repAssessment.addEventListener("change", showReports);
 
 document.getElementById("resetBtn").addEventListener("click", function () {
+  repQuery.value = "";
   repLevel.value = "";
   repCohort.value = "";
   repSubject.value = "";

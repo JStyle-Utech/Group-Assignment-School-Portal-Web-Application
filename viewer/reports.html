@@ -60,7 +60,7 @@
     <section class="admin-banner">
       <div class="container">
         <h1>Reports</h1>
-        <p>Filter and view reports on grades and school fees (read only)</p>
+        <p>Search, filter and view reports on grades and school fees (read only)</p>
         <p class="admin-welcome" id="adminWelcome"></p>
       </div>
     </section>
@@ -74,6 +74,10 @@
             Subject and assessment change the score reports only.
           </p>
           <div class="inline-form">
+            <div class="field">
+              <label for="repQuery">Search student</label>
+              <input type="search" id="repQuery" placeholder="Name or student ID" />
+            </div>
             <div class="field">
               <label for="repLevel">Grade level</label>
               <select id="repLevel"><option value="">All grade levels</option></select>
@@ -139,6 +143,27 @@
           <h2 id="cohortHeading">Fees collected by cohort</h2>
           <p class="form-note">The bar shows the part of the billed amount that has been paid.</p>
           <ul class="bar-list" id="cohortBars"></ul>
+        </section>
+
+        <section class="panel" aria-labelledby="recordsHeading">
+          <h2 id="recordsHeading">Score records</h2>
+          <p class="form-note" id="recordsCount"></p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="sr-only">Saved scores that match the filters (read only)</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Student</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Assessment</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Letter</th>
+                </tr>
+              </thead>
+              <tbody id="recordsBody"></tbody>
+            </table>
+          </div>
         </section>
 
         <section class="panel" aria-labelledby="topHeading">

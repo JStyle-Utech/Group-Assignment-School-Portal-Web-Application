@@ -50,7 +50,7 @@
             <li><a href="../index.html">HOME</a></li>
             <li><a href="dashboard.html">TEACHER DASHBOARD</a></li>
             <li><a href="subjects.html">SUBJECTS</a></li>
-            <li><a href="grade-entry.html" class="active" aria-current="page">GRADE UPLOAD</a></li>
+            <li><a href="grade-entry.html" class="active" aria-current="page">GRADE ENTRY</a></li>
             <li><a href="report-card.html">REPORT CARDS</a></li>
             <li><a href="../login.html" id="logoutLink">LOG OUT</a></li>
           </ul>
@@ -61,7 +61,7 @@
     <!--Page banner-->
     <section class="admin-banner">
       <div class="container">
-        <h1> Grades Portal</h1>
+        <h1>Enter Student Grades</h1>
         <p>Type the scores for your class and save them all at once</p>
         <p class="admin-welcome" id="adminWelcome"></p>
       </div>
@@ -119,6 +119,23 @@
               <a class="btn" href="report-card.html">Report cards</a>
             </div>
           </form>
+
+          <!-- Batch upload: one CSV file with student_id,score on every line -->
+          <div class="batch-box">
+            <h3>Batch upload (CSV file)</h3>
+            <p class="form-note">
+              Choose the assessment above, then upload a CSV file with two columns:
+              <strong>student_id</strong> and <strong>score</strong>. Each row is checked: the
+              student must exist, be Active and be in this grade level, and the score must be from
+              0 to 100. Good rows are saved. Rows with problems are skipped and listed below.
+            </p>
+            <div class="actions-row">
+              <button type="button" id="templateBtn" class="btn">Download template</button>
+              <button type="button" id="uploadBatchBtn" class="btn primary">Upload CSV</button>
+              <input type="file" id="batchFileInput" accept=".csv,text/csv" hidden />
+            </div>
+            <div id="batchResult" class="batch-result" role="status" aria-live="polite"></div>
+          </div>
         </section>
       </div>
     </main>
@@ -137,6 +154,7 @@
       protectTeacherPage();
     </script>
     <script src="../js/teacher-flow.js"></script>
+    <script src="../js/batch-upload.js"></script>
     <script src="../js/teacher-grades.js"></script>
     <script src="../js/nav.js"></script>
   </body>
