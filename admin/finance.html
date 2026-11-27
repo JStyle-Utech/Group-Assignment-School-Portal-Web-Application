@@ -205,6 +205,16 @@
         </section>
 
         <!-- Latest payments -->
+        <section class="panel" aria-labelledby="reportHeading">
+          <h2 id="reportHeading">Financial reporting</h2>
+          <p class="form-note">Download the complete account ledger or payment history as CSV files for spreadsheet analysis. Select a payment in the history to print its receipt.</p>
+          <div class="actions">
+            <button type="button" class="btn primary" id="exportLedger">Download ledger CSV</button>
+            <button type="button" class="btn" id="exportPayments">Download payments CSV</button>
+          </div>
+          <p class="message" id="exportMessage" role="status"></p>
+        </section>
+
         <section class="panel" aria-labelledby="transactionHeading">
           <h2 id="transactionHeading">Latest payments</h2>
           <div class="table-wrap">
@@ -217,6 +227,7 @@
                   <th scope="col">Description</th>
                   <th scope="col">Method</th>
                   <th scope="col">Amount</th>
+                  <th scope="col">Receipt</th>
                 </tr>
               </thead>
               <tbody id="transactionBody"></tbody>
