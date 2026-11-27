@@ -2,7 +2,13 @@
 <!--
   CIT2011 Web Programming - School Portal Group Project
   File: contact.html
-  Group Members: [NAMES AND ID NUMBERS]
+  Group Members: 
+    1. Shantelle Young | 2502159
+    2. Domonique Butler | 2502160
+    3. Jaheem Style | 2502161
+    4. Abigail Reid | 2502162
+    5. Ameallia Williams | 2502163
+
   Lab: FRIDAY 12PM
 
   Contact Us Page
@@ -140,6 +146,27 @@
               <button type="submit" class="button">Send Message</button>
             </div>
           </form>
+
+          <p id="success-message" class="success-message" hidden></p>
+
+          <!-- Small Javascript code to display message-->
+          <script>
+            const contactForm = document.querySelector("#contact-form");
+            const successMessage = document.querySelector("#success-message");
+
+            contactForm.addEventListener("submit", function (event) {
+              event.preventDefault();
+
+              successMessage.textContent =
+                "Thank you for contacting us! Your message has been received.";
+
+              // reveals message
+              successMessage.hidden = false;
+
+              // clears form
+              contactForm.reset();
+            });
+          </script>
         </div>
       </section>
     </main>
