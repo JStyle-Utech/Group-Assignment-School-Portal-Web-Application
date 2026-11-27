@@ -386,15 +386,17 @@ textarea {
     linear-gradient(rgba(40, 0, 0, 0.55), rgba(40, 0, 0, 0.55)),
     url("../images/wolmershero.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center 30%;
   background-repeat: no-repeat;
   background-color: var(--primary-colour);
   min-height: 350px;
   display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
   color: var(--card-colour);
-  padding: var(--spacing-large);
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 .hero-about h1 {
@@ -628,9 +630,20 @@ textarea {
 ========================= */
 
 .contact-banner {
-  background-color: var(--primary-colour);
-  padding: 70px 20px;
+  background-image:
+    linear-gradient(rgba(40, 0, 0, 0.55), rgba(40, 0, 0, 0.55)),
+    url("../images/wolmershero.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  min-height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  color: var(--card-colour);
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 /* Contact Us heading */
@@ -662,6 +675,7 @@ textarea {
 .contact-form-section {
   background-color: #f7f3ed;
   padding: var(--spacing-sections) 20px;
+  text-align: center;
 }
 
 #contact-form {
@@ -706,6 +720,15 @@ textarea {
   text-align: center;
 }
 
+.success-message {
+  margin-top: 35px;
+  padding: 20px;
+  color: var(--primary-colour);
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
 #contact-form .button {
   width: 100%;
   transition:
@@ -723,14 +746,20 @@ textarea {
 ========================= */
 
 .login-welcome {
-  background:
-    linear-gradient(rgba(40, 0, 0, 0.6), rgba(40, 0, 0, 0.6)),
+  background-image:
+    linear-gradient(rgba(40, 0, 0, 0.55), rgba(40, 0, 0, 0.55)),
     url("../images/wolmershero.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  min-height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 65px 20px;
-  color: white;
+  color: var(--card-colour);
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 .login-welcome h1 {
