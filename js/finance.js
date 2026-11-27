@@ -27,6 +27,58 @@ const ledgerSearch = document.getElementById("ledgerSearch");
 const ledgerStatus = document.getElementById("ledgerStatus");
 const ledgerBody = document.getElementById("ledgerBody");
 
+function allPayments() {
+  const payments = [];
+  getData(STORAGE_KEYS.finances).forEach(function (record) {
+    (record.payments || []).forEach(function (payment, index) {
+      payments.push({
+        receiptId: record.recordId + "-P" + (index + 1),
+        date: payment.date, method: payment.method, amount: payment.amount,
+        studentId: record.studentId, description: record.description,
+        recordId: record.recordId,
+      });
+    });
+  });
+  return payments;
+}
+
+function csvCell(value) {
+  const text = String(value == null ? "" : value);
+  // Quoting all cells, and neutralising formulas, makes exports safe to open in Excel.
+  const safe = /^[\s]*[=+@\-\t\r]/.test(text) ? "'" + text : text;
+  return '"' + safe.replace(/"/g, '""') + '"';
+}
+
+function downloadCsv(filename, headings, rows) {
+  const csv = [headings].concat(rows).map(function (row) {
+    return row.map(csvCell).join(",");
+  }).join("\r\n");
+  const url = URL.createObjectURL(new Blob(["\uFEFF" + csv], {type: "text/csv;charset=utf-8"}));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+}
+
+document.getElementById("exportLedger").addEventListener("click", function () {
+  const records = getData(STORAGE_KEYS.finances);
+  downloadCsv("school-ledger.csv",
+    ["Record ID", "Student ID", "Student", "Description", "Due date", "Amount due JMD", "Paid JMD", "Balance JMD", "Status"],
+    records.map(function (r) { return [r.recordId, r.studentId, getStudentName(r.studentId), r.description, r.dueDate, r.amountDue, getAmountPaid(r), getBalance(r), getAccountStatus(r)]; }));
+  document.getElementById("exportMessage").textContent = "Ledger exported (" + records.length + " accounts).";
+});
+
+document.getElementById("exportPayments").addEventListener("click", function () {
+  const payments = allPayments();
+  downloadCsv("school-payments.csv",
+    ["Receipt ID", "Date", "Student ID", "Student", "Charge", "Method", "Amount JMD"],
+    payments.map(function (p) { return [p.receiptId, p.date, p.studentId, getStudentName(p.studentId), p.description, p.method, p.amount]; }));
+  document.getElementById("exportMessage").textContent = "Payments exported (" + payments.length + " transactions).";
+});
+
 // The record that just changed (its status badge will flash)
 let flashRecordId = "";
 
@@ -175,21 +227,8 @@ function showLedger() {
 
 // The 10 most recent payments from all accounts
 function showTransactions() {
-  const records = getData(STORAGE_KEYS.finances);
   const body = document.getElementById("transactionBody");
-  const payments = [];
-
-  for (let i = 0; i < records.length; i++) {
-    for (let j = 0; j < records[i].payments.length; j++) {
-      payments.push({
-        date: records[i].payments[j].date,
-        method: records[i].payments[j].method,
-        amount: records[i].payments[j].amount,
-        studentId: records[i].studentId,
-        description: records[i].description,
-      });
-    }
-  }
+  const payments = allPayments();
 
   // Newest date first
   payments.sort(function (a, b) {
@@ -199,7 +238,7 @@ function showTransactions() {
   body.innerHTML = "";
 
   if (payments.length === 0) {
-    body.innerHTML = '<tr><td colspan="5"><div class="empty-note">No payments recorded yet.</div></td></tr>';
+    body.innerHTML = '<tr><td colspan="6"><div class="empty-note">No payments recorded yet.</div></td></tr>';
   }
 
   for (let i = 0; i < payments.length && i < 10; i++) {
@@ -209,9 +248,31 @@ function showTransactions() {
       "<td>" + escapeHtml(getStudentName(p.studentId)) + "</td>" +
       "<td>" + escapeHtml(p.description) + "</td>" +
       "<td>" + escapeHtml(p.method) + "</td>" +
-      "<td>" + formatMoney(p.amount) + "</td></tr>";
+      "<td>" + formatMoney(p.amount) + "</td>" +
+      '<td><button type="button" class="btn small" data-receipt="' + escapeHtml(p.receiptId) + '">Print</button></td></tr>';
   }
 }
+
+document.getElementById("transactionBody").addEventListener("click", function (event) {
+  const button = event.target.closest("button[data-receipt]");
+  if (!button) return;
+  const payment = allPayments().find(function (p) { return p.receiptId === button.dataset.receipt; });
+  if (!payment) return;
+  const receipt = window.open("", "_blank", "width=600,height=650");
+  if (!receipt) { alert("Allow pop-ups to print this receipt."); return; }
+  receipt.document.write('<!doctype html><html><head><title>Payment receipt</title><style>body{font:16px Arial,sans-serif;max-width:520px;margin:45px auto;line-height:1.8}h1{color:#800000}hr{border:0;border-top:2px solid #800000}</style></head><body>' +
+    '<h1>School Payment Receipt</h1><hr><p><b>Receipt:</b> ' + escapeHtml(payment.receiptId) +
+    '<br><b>Date:</b> ' + escapeHtml(payment.date) +
+    '<br><b>Student:</b> ' + escapeHtml(getStudentName(payment.studentId)) +
+    '<br><b>Student ID:</b> ' + escapeHtml(payment.studentId) +
+    '<br><b>For:</b> ' + escapeHtml(payment.description) +
+    '<br><b>Payment method:</b> ' + escapeHtml(payment.method) +
+    '<br><b>Amount received:</b> ' + formatMoney(payment.amount) +
+    '</p><hr><p>Generated from the School Portal demonstration ledger.</p></body></html>');
+  receipt.document.close();
+  receipt.focus();
+  receipt.print();
+});
 
 function showEverything() {
   fillAccountList();
